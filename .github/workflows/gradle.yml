@@ -30,6 +30,13 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache : gradle
+
+    - name : Init Gradle
+      uses : gradle/grade-build-action@v1
+      with : 
+        gradle-version: 8.5
+        
         
     - name : permission for dradlew
       run : chmod +x gradlew
