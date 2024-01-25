@@ -33,7 +33,7 @@ jobs:
         cache : gradle
 
     - name: List files in the gradle wrapper directory
-      run: ls -la ./be/gradle/wrapper/
+      run: ls -la ../be/gradle/wrapper/
 
     - name : Init Gradle
       uses : gradle/gradle-build-action@v1
