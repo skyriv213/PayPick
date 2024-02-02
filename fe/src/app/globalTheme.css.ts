@@ -14,34 +14,36 @@ createGlobalTheme(':root', global, {
     color: 'rgb(255, 255, 255)'
   },
   foreground: {
-    color: 'rgb(0, 0, 0)'
+    color: 'rgb(61, 108, 229)'
   },
 });
 
-const darkGlobalTheme = {
-  background: {
-    color: 'rgb(0, 0, 0)'
-  },
-  foreground: {
-    color: 'rgb(255, 255, 255)'
-  },
-}
+// const darkGlobalTheme = {
+//   background: {
+//     color: 'rgb(0, 0, 0)'
+//   },
+//   foreground: {
+//     color: 'rgb(61, 108, 229)'
+//   },
+// }
 
-globalStyle(':root', {
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      vars: assignVars(global, darkGlobalTheme),
-    }
-  }
-})
+// globalStyle(':root', {
+//   '@media': {
+//     '(prefers-color-scheme: dark)': {
+//       vars: assignVars(global, darkGlobalTheme),
+//     }
+//   }
+// })
 
 globalStyle('*', {
+  fontWeight: '600',
   boxSizing: 'border-box',
   padding: 0,
   margin: 0,
 })
 
 globalStyle('html', {
+  overscrollBehavior: 'none',
   '@media': {
     '(prefers-color-scheme: dark)': {
       colorScheme: 'dark',
@@ -56,7 +58,7 @@ globalStyle('html, body', {
 
 globalStyle('body', {
   color: global.foreground.color,
-  overscrollBehavior: 'none'
+  
 })
 
 globalStyle('a', {

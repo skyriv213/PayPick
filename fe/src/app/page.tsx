@@ -1,13 +1,15 @@
 import * as styles from './page.css'
+import Map from './_map';
 
 export default function Home() {
+
   return (
-    <main >
-      <div className={styles.container}>
-          Get started by editing
-         
+    <main className={styles.container}>
+      <div className={styles.header}>
+        <div className={styles.logo}>Paypick</div>
+        <div className={styles.menu}>=</div>
       </div>
-      <div className={styles.center}>hello</div>
+      <Map/>
     </main>
   );
 }
