@@ -1,5 +1,5 @@
 import * as styles from './page.css'
-import Map from './_map';
+import Map from './_component/map';
 
 export default function Home() {
 
