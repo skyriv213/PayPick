@@ -2,7 +2,7 @@
 name: Issue template
 about: issue 작성을 위한 템플릿 입니다
 title: ''
-labels: bug, enhancement
+labels: enhancement
 assignees: ''
 
 ---
