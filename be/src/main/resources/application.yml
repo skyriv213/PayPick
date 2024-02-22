@@ -1,0 +1,20 @@
+# Https 포트 설정
+server:
+  port: 8443
+# 인증서 파일 경로 및 비밀번호 설정
+  ssl:
+    key-store: /Users/skyriv213/Desktop/paypick/be/src/main/resources/keystore.p12
+    key-store-type: PKCS12
+    key-alias: localhost
+    key-store-password: pigo0808
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://root:1234@localhost:3306/ana?charset=utf8mb4
+
