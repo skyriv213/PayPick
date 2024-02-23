@@ -5,13 +5,14 @@ export type Coordinates = [Lat, Lng];
 export type NaverMap = naver.maps.Map;
 
 export type Marker = {
-    map: NaverMap;
-    coordinates: Coordinates;
-    icon: ImageIcon;
+    map?: NaverMap;
+    coordinates : Coordinates
+    // icon: SvgIcon;
     onClick?: () => void;
   };
 
-  export type ImageIcon = {
+  export type SvgIcon = {
+    // isSelected: boolean
     url: string;
     size: naver.maps.Size;
     origin: naver.maps.Point;
