@@ -32,20 +32,20 @@ public class StoreController {
     public ResponseEntity<List<StoreResponseListDto>> getStoreInMap(
         @RequestBody PositionRequestDto request) {
         List<StoreResponseListDto> responseDtoList = storeService.getStoreInMap(request);
-        return ResponseEntity.ok().header(setHttpHeaders.setHttpHeaderTypeJson())
+        return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson())
             .body(responseDtoList);
     }
 
     @GetMapping("/{storeId}")
     public ResponseEntity<StoreDto> getStoreInfo(@PathVariable Long storeId) {
         StoreDto storeDto = storeService.getStoreInfo(storeId);
-        return ResponseEntity.ok().body(storeDto);
+        return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson()).body(storeDto);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Store>> allList() {
         List<Store> storeList = storeService.findAll();
-        return ResponseEntity.ok().body(storeList);
+        return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson()).body(storeList);
     }
 
 }
