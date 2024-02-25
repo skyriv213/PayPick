@@ -26,7 +26,7 @@ public class StoreController {
 
     private final StoreService storeService;
     public static final String STORE_API_URI = "/store";
-    private SetHttpHeaders setHttpHeaders;
+    private final SetHttpHeaders setHttpHeaders;
 
     @GetMapping
     public ResponseEntity<List<StoreResponseListDto>> getStoreInMap(
