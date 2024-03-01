@@ -267,9 +267,6 @@ function sendToClient(client, message, transferrables = []) {
   })
 }
 
-msw.worker.logger.log('info', 'Sending response to client:', response.body);
-
-
 async function respondWithMock(response) {
   // Setting response status code to 0 is a no-op.
   // However, when responding with a "Response.error()", the produced Response
