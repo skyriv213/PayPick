@@ -1,44 +1,42 @@
 "use client"
 
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import { SvgIcon } from "@/types/map";
 import Marker from "./marker";
-import { MAP_KEY } from "@/hooks/useMap";
-import { NaverMap } from '@/types/map';
+import { NaverMap, Coordinates} from '@/types/map';
+
 
 
 const stores = [
   {
     storeId: '1',
     Name : 'string',
-    lat : 37.5753411,
-    lng : 126.97680949
-  },
-  {
-    storeId: '2',
-    Name : 'string',
-    lat : 37.4944247962443,
-    lng : 127.03868553433001
+    coordinates: [37.5753411, 126.97680949]
   }
 ]
 
 
 
 function Markers() {
-  const queryClient = useQueryClient();
-  const map = queryClient.getQueryData<NaverMap>([MAP_KEY]);
 
+  const MAP_KEY = '/map'
+  const queryClient = new QueryClient();
+  const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
+  // console.log(data);
+  
+  const map = data
   return (
     <>
       {stores.map((store) => {
         return (
           <Marker
             map={map}
-            coordinates={[37.5602411, 126.98789549]}
+            coordinates={[37.5753411, 126.97680949]}
             // icon={generateMarkerIcon()}
             key={store.storeId}
             onClick={() => {}}
           />
+         
         );
       })}
     </>
