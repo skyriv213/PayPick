@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface StoreRepositoryCustom {
 
-    List<StoreResponseListDto> findAllStoreInMap(double leftX, double leftY, double rightX, double rightY);
+    List<StoreResponseListDto> findAllStoreInMap(double leftLatitude, double leftLongitude, double rightLatitude, double rightLongitude);
 }

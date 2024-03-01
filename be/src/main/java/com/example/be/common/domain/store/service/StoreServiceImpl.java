@@ -17,12 +17,12 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<StoreResponseListDto> getStoreInMap(PositionRequestDto request) {
-        double left_x = request.getLeftPosition().getX();
-        double left_y = request.getLeftPosition().getY();
-        double right_x = request.getRightPosition().getX();
-        double right_y = request.getRightPosition().getY();
+        double leftLatitude = request.getLeftPosition().getLatitude();
+        double leftLongitude = request.getLeftPosition().getLongitude();
+        double rightLatitude = request.getRightPosition().getLatitude();
+        double rightLongitude = request.getRightPosition().getLongitude();
 
-        List<StoreResponseListDto> storeList = storeRepository.findAllStoreInMap(left_x, left_y, right_x, right_y);
+        List<StoreResponseListDto> storeList = storeRepository.findAllStoreInMap(leftLatitude, leftLongitude, rightLatitude, rightLongitude);
         return storeList;
     }
 

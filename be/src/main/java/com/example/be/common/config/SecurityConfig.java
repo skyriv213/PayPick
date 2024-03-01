@@ -40,7 +40,8 @@ public class SecurityConfig   {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
+        configuration.addAllowedMethod("GET");
+        configuration.addAllowedMethod("POST");
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

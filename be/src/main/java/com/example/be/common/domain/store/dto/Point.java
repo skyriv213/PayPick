@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class Point {
 
-    private double x;
-    private double y;
+    //latitude, x
+    private double latitude;
+    //longitude, y
+    private double longitude;
 }

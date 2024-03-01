@@ -1,6 +1,7 @@
 package com.example.be.common.domain.store.entity;
 
 import com.example.be.common.domain.payway.entity.Payway;
+import com.querydsl.core.annotations.QueryEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,28 +22,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 
+@QueryEntity
 @Entity
 @Table(name = "store")
 public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "int")
+    @Column(columnDefinition = "int", nullable = false)
     private Long id;
 
+    @Column(name = "store_name", nullable = true, length = 255)
     private String storeName;
 
+    @Column(nullable = true, length = 50)
     private String majorCategory;
 
+    @Column(nullable = true, length = 50)
     private String middleCategory;
 
+    @Column(name = "address", nullable = true, length = 255)
     private String storeAddress;
 
-    //위도 ----
-    private float latitude;
+    // 위도 ----
+    @Column(nullable = true)
+    private Double latitude;
 
-    //경도 ||||
-    private float longitude;
+    // 경도 ||||
+    @Column(nullable = true)
+    private Double longitude;
 
     @OneToMany(mappedBy = "store")
     @Builder.Default
