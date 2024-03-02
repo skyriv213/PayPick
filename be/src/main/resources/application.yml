@@ -1,11 +1,11 @@
 # Https 포트 설정
-server:
-  port: 8443
-# 인증서 파일 경로 및 비밀번호 설정
-  ssl:
-    key-store: /Users/skyriv213/Desktop/paypick/be/localhost.p12
-    key-store-type: PKCS12
-    key-store-password: 8759
+#server:
+#  port: 8080
+## 인증서 파일 경로 및 비밀번호 설정
+#  ssl:
+#    key-store: /Users/skyriv213/Desktop/paypick/be/localhost.p12
+#    key-store-type: PKCS12
+#    key-store-password: 8759
 
 spring:
   jpa:

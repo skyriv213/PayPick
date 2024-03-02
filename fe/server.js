@@ -13,8 +13,8 @@ NODE_TLS_REJECT_UNAUTHORIZED=0
 
 
 const httpsOptions = {
-  key: fs.readFileSync("/Users/ihyeondong/Desktop/PayPick/fe/localhost-key.pem"),
-  cert: fs.readFileSync("/Users/ihyeondong/Desktop/PayPick/fe/localhost.pem"),
+  key: fs.readFileSync("./certs/localhost-key.pem"),
+  cert: fs.readFileSync("./certs/localhost.pem"),
 };
 
 app.prepare().then(() => {
@@ -32,4 +32,3 @@ app.prepare().then(() => {
     console.log(`> Ready on https://${hostname}:${port}`);
   });
 });
-// 출처 https://trend21c.tistory.com/2266
