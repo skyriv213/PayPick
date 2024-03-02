@@ -15,7 +15,7 @@ class Store(Base):
     store_name = Column(String(255))  # 예를 들어, 최대 길이를 255로 설정
     major_category = Column(String(250))  # 데이터베이스 컬럼 타입에 맞춰 수정
     middle_category = Column(String(250))
-    store_address = Column(String(255))
+    address = Column(String(255))
     latitude = Column(DECIMAL(9, 6))
     longitude = Column(DECIMAL(9, 6))
 
@@ -47,7 +47,7 @@ with Session() as session:
                 store_name=store_name,
                 major_category=temp_c,
                 middle_category=middle_c,  # 필요한 경우 길이 제한 적용
-                store_address=row['도로명주소'][:255],  # 필요한 경우 길이 제한 적용
+                address=row['도로명주소'][:255],  # 필요한 경우 길이 제한 적용
                 latitude=Decimal(str(row['위도'])),
                 longitude=Decimal(str(row['경도']))
 
@@ -60,7 +60,7 @@ with Session() as session:
                     store_name=store_name,
                     major_category=major_c,
                     middle_category=middle_c,  # 필요한 경우 길이 제한 적용
-                    store_address=row['도로명주소'][:255],  # 필요한 경우 길이 제한 적용
+                    address=row['도로명주소'][:255],  # 필요한 경우 길이 제한 적용
                     latitude=Decimal(str(row['위도'])),
                     longitude=Decimal(str(row['경도']))
 
