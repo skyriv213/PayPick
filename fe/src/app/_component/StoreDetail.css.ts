@@ -1,15 +1,18 @@
 import {globalStyle, style} from "@vanilla-extract/css";
 
 export const displayModal = style({
-  // position: 'absolute',
-  // top: '0',
-  // left: '0',
-  // width: '100',
-  // height: '100%',
-  // display: 'none',
+  width: '100%',
+  height: '100%',
 });
 
-export const map = style({
-  width: '100dvh',
-  height: '100dvh'
+export const payInfo = style({
+  padding: '5px',
+  display: "flex",
+  justifyContent: "space-between"
+});
+
+export const buttonCss = style({
+  width: '30px',
+  height: '30px',
+  borderRadius: '50%'
 });

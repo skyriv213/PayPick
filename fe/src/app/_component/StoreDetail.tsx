@@ -1,61 +1,33 @@
-"use client"
 
-// import React, { ReactNode } from "react";
+
 import { HydrationBoundary, QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { Coordinates, SvgIcon } from "@/types/map";
-import React,  { useState, useEffect, ReactNode } from 'react';
+import { useState } from 'react';
 import * as styles from './StoreDetail.css'
 
 
+  // const [storeData, setStoreData] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:8080/store/3');
+  //       const data = await res.json();
+  //       setStoreData(data);
+  //       console.log(data);
+        
+  //     } catch (error) {
+  //       console.error(error);
+        
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   
 
-  
-
-  // async function getStore() {
-  //   const res = await fetch(`http://localhost:8080/store/3`)
-    
-  //   if(!res.ok) {
-  //     throw new Error('Failed fetch data');
-  //   }
-  //   return await res.json();
-  // }
-
-  // const queryClient = new QueryClient();
-  // const dehydratedState = dehydrate(queryClient)
-  // const { data, error, isLoading } = useQuery({ queryKey: ["get-store"], queryFn: getStore });
-  // const { data } = await queryClient.fetchQuery({queryKey: ["get-store"], queryFn: getStore });
-  import Modal from './Modal';
-
-
-
-export default function StoreDetail() {
-
-  const [storeData, setStoreData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('http://localhost:8080/store/3');
-        const data = await res.json();
-        setStoreData(data);
-        console.log(data);
-        
-      } catch (error) {
-        console.error(error);
-        
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const [open, setOpen] = useState(true)
-
-  const onClickButton = () => {
-    setOpen(false);
-  };
-
-  // const data = {
+   // const data = {
   //   "id": 3,
   //   "storeName": "생곡메밀막국수",
   //   "majorCategory": "음식",
@@ -63,6 +35,20 @@ export default function StoreDetail() {
   //   "storeAddress": "경기도 화성시 동탄지성로 222",
   //   "paywayList": []
   // }
+
+ 
+  import Modal from './Modal';
+
+
+ function StoreDetail() {
+
+   async function getStore() {
+    const res = await fetch(`http://localhost:8080/store/3`)
+    if(!res.ok) {
+      throw new Error('Failed fetch data');
+    }
+    return await res.json();
+  }
 
   type Store = {
     id: number;
@@ -72,24 +58,42 @@ export default function StoreDetail() {
     storeAddress: string;
     paywayList: string | string[]
   };
-  if (storeData) {
-    const {id, storeName, majorCategory, middleCategory, storeAddress, paywayList} = storeData as Store; 
+
+  const { data, error, isLoading } = useQuery<Store>({ queryKey: ["get-store"], queryFn: getStore });
+  // const { data } = await queryClient.fetchQuery({queryKey: ["get-store"], queryFn: getStore });
+  
+  const [open, setOpen] = useState(true)
+
+  const onClickButton = () => {
+    setOpen(false);
+  };
+
+ 
+
+  
+  if (data) {
+    const {id, storeName, majorCategory, middleCategory, storeAddress, paywayList} = data
   
     return (
       <Modal open={open}>
         <div className={styles.displayModal}>
-        <button onClick={onClickButton}>Close</button>
-          {/* <HydrationBoundary state={dehydratedState}> */}
-            <div>{id}</div>
-            <div >{storeName}</div>
-            <div>{majorCategory}</div>
+          <div className={styles.payInfo}>
+            <div>{storeName}</div>
+            <button className={styles.buttonCss} onClick={onClickButton}>X</button>
+          </div>
+          <div>
             <div>{middleCategory}</div>
             <div>{storeAddress}</div>
-            <div>{paywayList}</div>
-          {/* </HydrationBoundary> */}
+          </div>
+          <div className={styles.payInfo}>
+            <div>{paywayList}애플페이</div>
+            <div>정보 수정 요청</div>
+          </div>
         </div>
       </Modal>
     )
   }
 }
+
+export default StoreDetail
 

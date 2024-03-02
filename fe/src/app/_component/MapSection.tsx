@@ -60,9 +60,9 @@ const MapSection = () => {
             initialZoom={INITIAL_ZOOM}
             initialCenter={INITIAL_CENTER}/>
             <Markers />
-            <div className={styles.displayModal} >
+            {/* <div className={styles.displayModal} > */}
                 <StoreDetail />
-            </div>
+            {/* </div> */}
         </HydrationBoundary>
         </>
     );
