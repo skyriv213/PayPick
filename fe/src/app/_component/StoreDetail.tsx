@@ -12,7 +12,7 @@ import * as styles from './StoreDetail.css'
   
 
   // async function getStore() {
-  //   const res = await fetch(`https://localhost:8443/store/3`)
+  //   const res = await fetch(`http://localhost:8080/store/3`)
     
   //   if(!res.ok) {
   //     throw new Error('Failed fetch data');
@@ -35,7 +35,7 @@ export default function StoreDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('https://localhost:8443/store/3');
+        const res = await fetch('http://localhost:8080/store/3');
         const data = await res.json();
         setStoreData(data);
         console.log(data);
@@ -55,14 +55,14 @@ export default function StoreDetail() {
     setOpen(false);
   };
 
-  const data = {
-    "id": 3,
-    "storeName": "생곡메밀막국수",
-    "majorCategory": "음식",
-    "middleCategory": "국수/칼국수",
-    "storeAddress": "경기도 화성시 동탄지성로 222",
-    "paywayList": []
-  }
+  // const data = {
+  //   "id": 3,
+  //   "storeName": "생곡메밀막국수",
+  //   "majorCategory": "음식",
+  //   "middleCategory": "국수/칼국수",
+  //   "storeAddress": "경기도 화성시 동탄지성로 222",
+  //   "paywayList": []
+  // }
 
   type Store = {
     id: number;
@@ -72,8 +72,8 @@ export default function StoreDetail() {
     storeAddress: string;
     paywayList: string | string[]
   };
-  if (data) {
-    const {id, storeName, majorCategory, middleCategory, storeAddress, paywayList} = data as Store; 
+  if (storeData) {
+    const {id, storeName, majorCategory, middleCategory, storeAddress, paywayList} = storeData as Store; 
   
     return (
       <Modal open={open}>
