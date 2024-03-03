@@ -42,10 +42,10 @@ public class StoreController {
         return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson()).body(storeDto);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Store>> allList() {
-        List<Store> storeList = storeService.findAll();
-        return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson()).body(storeList);
-    }
+//    @GetMapping("/all")
+//    public ResponseEntity<List<Store>> allList() {
+//        List<Store> storeList = storeService.findAll();
+//        return ResponseEntity.ok().headers(setHttpHeaders.setHttpHeaderTypeJson()).body(storeList);
+//    }
 
 }

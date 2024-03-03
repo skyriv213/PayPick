@@ -17,10 +17,10 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<StoreResponseListDto> getStoreInMap(PositionRequestDto request) {
-        double leftLatitude = request.getLeftPosition().getLatitude();
-        double leftLongitude = request.getLeftPosition().getLongitude();
-        double rightLatitude = request.getRightPosition().getLatitude();
-        double rightLongitude = request.getRightPosition().getLongitude();
+        double leftLatitude = request.getLeftPosition().getLat();
+        double leftLongitude = request.getLeftPosition().getLng();
+        double rightLatitude = request.getRightPosition().getLat();
+        double rightLongitude = request.getRightPosition().getLng();
 
         List<StoreResponseListDto> storeList = storeRepository.findAllStoreInMap(leftLatitude, leftLongitude, rightLatitude, rightLongitude);
         return storeList;
@@ -34,9 +34,9 @@ public class StoreServiceImpl implements StoreService {
         return storeDto;
     }
 
-    @Override
-    public List<Store> findAll() {
-        return storeRepository.findAll();
-    }
+//    @Override
+//    public List<Store> findAll() {
+//        return storeRepository.findAll();
+//    }
 
 }

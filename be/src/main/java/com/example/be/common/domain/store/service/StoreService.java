@@ -12,5 +12,5 @@ public interface StoreService {
 
     StoreDto getStoreInfo(Long storeId);
 
-    List<Store> findAll();
+//    List<Store> findAll();
 }

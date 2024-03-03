@@ -1,6 +1,5 @@
 package com.example.be.common.domain.store.dto;
 
-import com.example.be.common.domain.store.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,12 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StoreResponseListDto {
 
-    private Long storeId;
-    private String storeName;
+    private Long id;
+    private String name;
     private String middleCategory;
-    private double latitude;
+    private double lat;
 
-    private double longitude;
+    private double lng;
 
 //    public StoreResponseListDto(Long storeId, String storeName, String middleCategory,
 //        double latitude,
