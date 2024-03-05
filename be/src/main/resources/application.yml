@@ -1,6 +1,6 @@
 # Https 포트 설정
-#server:
-#  port: 8080
+server:
+ port: 8081
 ## 인증서 파일 경로 및 비밀번호 설정
 #  ssl:
 #    key-store: /Users/skyriv213/Desktop/paypick/be/localhost.p12
