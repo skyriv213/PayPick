@@ -42,6 +42,7 @@ public class SecurityConfig   {
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
 
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setExposedHeaders(Arrays.asList("Location"));
 
