@@ -7,6 +7,7 @@ import { Marker } from "@/types/map";
 const Marker = ({ map, coordinates }: Marker): null => {
     
   useEffect(() => {
+      if (!map) return;
       let marker: naver.maps.Marker | null = null;
       if (map) {
           marker = new naver.maps.Marker({
@@ -28,12 +29,21 @@ const Marker = ({ map, coordinates }: Marker): null => {
       return () => {
       marker?.setMap(null);
       };
-}, [map]); // eslint-disable-line react-hooks/exhaustive-deps
+}, [map]);
 
 return null;
 };
 
 export default Marker;
 
-
+// {
+//   "leftPosition": {
+//   "lat": 37.395628,
+//   "lng": 126.929901
+// },
+// "rightPosition": {
+//   "lat": 37.400051,
+//   "lng": 126.93025
+// }
+// }
   

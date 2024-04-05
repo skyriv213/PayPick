@@ -23,7 +23,6 @@ const MapSection = () => {
     //   () => (query.get('zoom') ? Number(query.get('zoom')) : INITIAL_ZOOM),
     //   [query]
     // );
-
     // const initialCenter = useMemo<Coordinates>(
     //   () =>
     //     query.get('lat') && query.get('lng')
@@ -35,12 +34,7 @@ const MapSection = () => {
     const MAP_KEY = '/map'
     const queryClient = new QueryClient()
     const dehydratedState = dehydrate(queryClient)
-    const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
-
     
-    // const initializeMap = (map: NaverMap) => {
-    //     queryClient.setQueryData([MAP_KEY], map);
-    //   }
     const CURRENT_STORE_KEY = '/current-store';
     const clearCurrentStore = () => {
       queryClient.setQueryData([CURRENT_STORE_KEY], null);
@@ -53,6 +47,9 @@ const MapSection = () => {
         naver.maps.Event.addListener(map, 'click', clearCurrentStore);
     };
 
+    const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
+    console.log(data);
+
     return (
         <>
         <HydrationBoundary state={dehydratedState}>
@@ -60,9 +57,7 @@ const MapSection = () => {
             initialZoom={INITIAL_ZOOM}
             initialCenter={INITIAL_CENTER}/>
             <Markers />
-            {/* <div className={styles.displayModal} > */}
-                <StoreDetail />
-            {/* </div> */}
+            <StoreDetail />
         </HydrationBoundary>
         </>
     );

@@ -1,24 +1,20 @@
-// type x = number
-// type y = number
+type latitude = number
+type longitude = number
+export type coor = [latitude, longitude]
 
-// export type storePosition = [x, y]
-import { Coordinates } from "./map";
+export type Store = {
+  id: number;
+  name: string;
+  majorCategory?: string;
+  middleCategory?: string;
+  address: string;
+  paywayList: string | string[]
+};
 
-// export type Stores = {
-//   id: number;
-//   storeName: string;
-//   majorCategory: string;
-//   middleCategory: string;
-//   storeAddress: string;
-//   storePosition?: storePosition;
-//   paywayList: string | string[]
-// };
-
-export type store = {
-  id: string;
-  storeName: string; 
-  majorCategory: string;
+export type Stores = {
+  id: number;
+  storeName: string;
   middleCategory: string;
-  storeAddress: string;
-  paywayList: string[]
-}
+  latitude: number;
+  longitude: number;
+};

@@ -9,7 +9,7 @@ export const displayModal = style({
   borderRadius: '10px',
 });
 
-export const map = style({
-  width: '100dvh',
-  height: '100dvh'
-});
+// export const map = style({
+//   width: '100dvh',
+//   height: '100dvh'
+// });
