@@ -3,20 +3,46 @@
 import Map from './map';
 import { NaverMap } from '@/types/map';
 import Markers from './markers';
-import { HydrationBoundary, dehydrate, QueryClient } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useMemo,useCallback, ReactNode, useState } from 'react';
-import { Coordinates } from '@/types/map';
-import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from '@/hooks/useMap';
+import useMap, { INITIAL_CENTER, INITIAL_ZOOM, MAP_KEY } from '@/hooks/useMap';
+import useStore from '@/hooks/useStore';
 import StoreDetail from './StoreDetail';
-import * as styles from './MapSection.css'
-import Modal from './Modal';
-
 
 
 const MapSection = () => {
-    // const [showModal, setShowModal] = useState(false);
-    // const router = useRouter();
+    const queryClient = new QueryClient()
+    const dehydratedState = dehydrate(queryClient)
+
+    const { initializeMap } = useMap();
+    const { clearCurrentStore } = useStore()
+
+    const onLoadMap = (map: NaverMap) => {
+        initializeMap(map);
+        console.log(map);
+        naver.maps.Event.addListener(map, 'click', clearCurrentStore);
+    };
+
+    const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
+    console.log(data);
+
+    return (
+        <>
+            <HydrationBoundary state={dehydratedState}>
+                <Map onLoad = {onLoadMap}
+                initialZoom={INITIAL_ZOOM}
+                initialCenter={INITIAL_CENTER}/>
+                <Markers />
+                <StoreDetail />
+            </HydrationBoundary>
+        </>
+    );
+};
+
+export default MapSection;
+
+
+// const router = useRouter();
     
     // const query = useMemo(() => new URLSearchParams(router.asPath.slice(1)), []); // eslint-disable-line react-hooks/exhaustive-deps
     // const initialZoom = useMemo(
@@ -30,37 +56,3 @@ const MapSection = () => {
     //       : INITIAL_CENTER,
     //   [query]
     // );
-
-    const MAP_KEY = '/map'
-    const queryClient = new QueryClient()
-    const dehydratedState = dehydrate(queryClient)
-    
-    const CURRENT_STORE_KEY = '/current-store';
-    const clearCurrentStore = () => {
-      queryClient.setQueryData([CURRENT_STORE_KEY], null);
-    }
-
-    const { initializeMap } = useMap();
-
-    const onLoadMap = (map: NaverMap) => {
-        initializeMap(map);
-        naver.maps.Event.addListener(map, 'click', clearCurrentStore);
-    };
-
-    const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
-    console.log(data);
-
-    return (
-        <>
-        <HydrationBoundary state={dehydratedState}>
-            <Map onLoad = {onLoadMap}
-            initialZoom={INITIAL_ZOOM}
-            initialCenter={INITIAL_CENTER}/>
-            <Markers />
-            <StoreDetail />
-        </HydrationBoundary>
-        </>
-    );
-};
-
-export default MapSection;

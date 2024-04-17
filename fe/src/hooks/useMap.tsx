@@ -1,40 +1,42 @@
-import { useCallback } from 'react';
-import { QueryClient } from '@tanstack/react-query';
-import { Coordinates } from '@/types/map';
+import { useCallback, useMemo } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Coordinates, NaverMap } from '@/types/map';
 
+export const INITIAL_CENTER: Coordinates = [37.693314,126.779666];
+export const INITIAL_ZOOM = 17;
+export const MAP_KEY = "map"
 
-type NaverMap = naver.maps.Map;
-
-type lat = number
-type lng = number
-
-
-export const INITIAL_CENTER: Coordinates = [37.395628,126.929901];
-export const INITIAL_ZOOM = 15;
-export const MAP_KEY = '/map'
-
- function useMap() {
-  const queryClient = new QueryClient()
-  const map = queryClient.getQueryData<NaverMap>([MAP_KEY]);
+ const useMap = () => {
+  const queryClient = useQueryClient()
 
   const initializeMap = useCallback((map: NaverMap) => {
     queryClient.setQueryData([MAP_KEY], map);
-    console.log(map);
-  },[]);
-
-  const resetMapOptions = () => {
+  }, []);
+  
+  const resetMapOptions = useCallback(() => {
+    const map = queryClient.getQueryData<NaverMap>([MAP_KEY]);
     if (!map) return;
     map.morph(new naver.maps.LatLng(...INITIAL_CENTER), INITIAL_ZOOM);
-  };
+  }, [])
 
   const getMapOptions = useCallback(() => {
-    if (!map) return;
-    const mapCenter = map.getCenter() as naver.maps.LatLng;
+    const map = queryClient.getQueryData<NaverMap>([MAP_KEY]);
+    const mapCenter = map?.getCenter() as naver.maps.LatLng;
     const center: Coordinates = [mapCenter.lat(), mapCenter.lng()];
-    const zoom = map.getZoom();
+    const zoom = map?.getZoom();
   
     return { center, zoom };
-  }, [map]);
+  }, [])
+
+  return {
+    initializeMap,
+    resetMapOptions,
+    getMapOptions,
+    // getMarkers
+  };
+};
+
+export default useMap
 
 //   const getMarkers = useCallback((map: NaverMap) => {
 //     const bounds = map.getBounds() as naver.maps.PointBounds;
@@ -67,12 +69,4 @@ export const MAP_KEY = '/map'
     // }
   
 
-  return {
-    initializeMap,
-    resetMapOptions,
-    getMapOptions,
-    // getMarkers
-  };
-};
-
-export default useMap
+  

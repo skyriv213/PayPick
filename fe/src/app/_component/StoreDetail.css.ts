@@ -1,12 +1,20 @@
 import {globalStyle, style} from "@vanilla-extract/css";
 
 export const displayModal = style({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
   width: '100%',
   height: '100%',
+  padding: '10px',
+});
+
+export const info = style({
+ paddingBottom: "10px"
 });
 
 export const payInfo = style({
-  padding: '5px',
+  // padding: '5px',
   display: "flex",
   justifyContent: "space-between"
 });

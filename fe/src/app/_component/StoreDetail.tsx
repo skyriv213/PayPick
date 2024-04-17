@@ -5,8 +5,7 @@ import * as styles from './StoreDetail.css'
 import Modal from './Modal';
 import { Store } from '@/types/store';
 
-
- function StoreDetail() {
+ const StoreDetail = () => {
   
   const [open, setOpen] = useState(true)
 
@@ -15,7 +14,7 @@ import { Store } from '@/types/store';
   };
 
   async function getStore() {
-    const res = await fetch(`http://localhost:8080/store/4`)
+    const res = await fetch(`http://localhost:8080/store/59368`)
     if(!res.ok) {
       throw new Error('Failed fetch data');
     }
@@ -34,7 +33,7 @@ import { Store } from '@/types/store';
             <div>{name}</div>
             <button className={styles.buttonCss} onClick={closeButton}>X</button>
           </div>
-          <div>
+          <div className={styles.info}>
             <div>{middleCategory}</div>
             <div>{address}</div>
           </div>

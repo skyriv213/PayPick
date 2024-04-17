@@ -1,30 +1,31 @@
 import { useCallback } from 'react';
-import { Stores } from '../types/store';
+import { Store } from '../types/store';
 import { useQueryClient } from '@tanstack/react-query';
 
 
 export const STORE_KEY = '/stores';
+export const CURRENT_STORE_KEY = "/current-store";
 
-const useStores = () => {
+const useStore = () => {
+    const queryClient = useQueryClient();
 
-  // async function getStores() {
-  //   const res = await fetch(`http://localhost:8080/store/3`)
-  //   if(!res.ok) {
-  //     throw new Error('Failed fetch data');
-  //   }
-  //   return await res.json();
-  // }
+    const initializeStores = useCallback((stores: Store[]) => {
+      queryClient.setQueryData([STORE_KEY], stores);
+    }, []);
 
-  // const { data } = useQuery<Store>({ queryKey: ["get-store"], queryFn: getStores });
+    const setCurrentStore = useCallback((store: Store) => {
+      queryClient.setQueryData([CURRENT_STORE_KEY], store);
+    }, []);
 
-  const queryClient = useQueryClient();
-
-  const initializeStores = useCallback((stores: Stores[]) => {
-    queryClient.setQueryData([STORE_KEY], stores);
-  }, [queryClient]);
+    const clearCurrentStore = useCallback(() => {
+      queryClient.setQueryData([CURRENT_STORE_KEY], null);
+    }, []);
 
   return {
     initializeStores,
+    setCurrentStore,
+    clearCurrentStore,
   };
-};
-export default useStores;
+}
+
+export default useStore;
