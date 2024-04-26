@@ -56,7 +56,7 @@ const Map = ({
                 src = {`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_ID}`}
                 onReady = {initializeMap}
             />
-            <div id = {mapId}className={styles.mapSize}/>
+            <div id = {mapId} className={styles.mapSize}/>
             
         </>
     )

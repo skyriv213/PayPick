@@ -3,13 +3,14 @@ import {global} from "@/app/globalTheme.css";
 
 export const container = style({
   display: 'flex',
-  flexDirection: 'row',
+  // flexDirection: 'row',
+  flexDirection: 'column',
   backgroundColor: "white",
   width: '100dvw',
   height: '100dvh',
-  '@media': {
-    '(max-width: 1100px)': {
-      flexDirection: 'column',
-    }
-  }
+  // '@media': {
+  //   '(max-width: 1100px)': {
+  //     flexDirection: 'column',
+  //   }
+  // }
 })

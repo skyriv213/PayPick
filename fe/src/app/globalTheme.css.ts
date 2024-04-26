@@ -65,3 +65,9 @@ globalStyle('a', {
   color: 'inherit',
   textDecoration: 'none',
 })
+
+globalStyle('ul, ol', {
+  listStyle: 'none',
+  padding: '0',
+  margin: '0',
+})

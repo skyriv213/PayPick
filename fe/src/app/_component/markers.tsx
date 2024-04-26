@@ -34,8 +34,6 @@ const Markers = () => {
         leftPosition: { lat: southWest.y, lng: southWest.x },
         rightPosition: { lat: northEast.y, lng: northEast.x }
       };
-      console.log(southWest.y);
-      console.log(northEast.y);
       setCoordinates(newCoordinates);
     }
   }, [map]);
@@ -57,16 +55,14 @@ const Markers = () => {
   });
   // const coordinates = getCoordinatesFromBounds(map.getBounds() as naver.maps.LatLngBounds);
   console.log(coordinates);
-  console.log(stores);
+  // console.log(stores);
   
   const convertToCoordinates = (lat: number, lng: number): Coordinates => {
     return [lat, lng];
   };
   // if (isLoading) return <div>Loading...</div>;
 
-
-  // 에러 발생시 UI 처리
-  if (error) return <div>{error.message}</div>;
+  // if (error) return <div>{error.message}</div>; // 에러 발생시 UI 처리
   // if (error) return console.log(error.message);
   
   return (
@@ -80,7 +76,7 @@ const Markers = () => {
             key={store.id}
             onClick={() => {
               setCurrentStore(store)
-          />
+            }}/>
         );
       })}
       {currentStore && (
