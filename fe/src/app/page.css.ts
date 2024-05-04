@@ -7,7 +7,9 @@ export const container = style({
   flexDirection: 'column',
   backgroundColor: "white",
   width: '100dvw',
-  height: '100dvh',
+  // maxWidth: '1280px',
+  // margin: '0 auto',
+  // height: '100dvh',
   // '@media': {
   //   '(max-width: 1100px)': {
   //     flexDirection: 'column',

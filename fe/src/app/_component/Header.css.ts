@@ -4,11 +4,11 @@ import {global} from "@/app/globalTheme.css";
 export const container = style({
   display: 'flex',
   justifyContent: "space-between",
-  flexDirection: 'row',
   width: '100dvw',
+  maxWidth: '1280px',
   height: '5dvh',
   minHeight: '40px',
-  maxHeight: '50px',
+  maxHeight: '60px',
   borderBottom: '0.5px solid lightGray',
   fontSize: '25px',
   backgroundColor: "white",

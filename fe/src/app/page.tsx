@@ -6,7 +6,6 @@ const Home = () => {
 
   return (
       <main className={styles.container}>
-        <Header />
         <MapSection />
       </main>
   );

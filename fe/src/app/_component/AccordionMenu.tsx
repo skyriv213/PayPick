@@ -15,13 +15,13 @@ const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
       </div>
         <ul className={styles.menuContent}>
           <li>
-            <Link href='/selectPay'>결제 수단 선택</Link>
+            <a href='/selectpay'>결제 수단 선택</a>
           </li>
           <li>
-            <Link href='/'>결제 인증</Link>
+            <a href='/'>결제 인증</a>
           </li>
           <li>
-            <Link href='/'>오류 정보 알리기</Link>
+            <a href='/'>오류 정보 알리기</a>
           </li>
         </ul>
     </div>

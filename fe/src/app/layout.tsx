@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globalTheme.css";
+import * as styles from './layout.css'
 import RQProvider from "./_component/RQProvider";
+import Header from "./_component/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${styles.wrapper}`}>
         <RQProvider>
-          {children}
-          <div id="modal"></div>
+          <div className={styles.wrapper}>
+            <Header />
+            {children}
+            <div id="modal"></div>
+          </div>
         </RQProvider>
       </body>
     </html>

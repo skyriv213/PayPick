@@ -1,4 +1,4 @@
-import {globalStyle, style} from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
 
 export const displayModal = style({
   display: "flex",
@@ -6,7 +6,7 @@ export const displayModal = style({
   justifyContent: "space-between",
   width: '100%',
   height: '100%',
-  padding: '10px',
+  padding: '5px',
 });
 
 export const info = style({
@@ -22,5 +22,7 @@ export const payInfo = style({
 export const buttonCss = style({
   width: '30px',
   height: '30px',
-  borderRadius: '50%'
+  borderRadius: '50%',
+  border: 'none',
+  color: 'gray'
 });

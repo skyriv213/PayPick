@@ -44,11 +44,11 @@ globalStyle('*', {
 
 globalStyle('html', {
   overscrollBehavior: 'none',
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      colorScheme: 'dark',
-    }
-  }
+  // '@media': { // 다크모드 설정시 배경 블랙으로 변경
+  //   '(prefers-color-scheme: dark)': {
+  //     colorScheme: 'dark',
+  //   }
+  // }
 });
 
 globalStyle('html, body', {

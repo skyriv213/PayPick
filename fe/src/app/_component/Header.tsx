@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>Paypick</div>
+      <a href={'/'} className={styles.logo}>Paypick</a>
       <button className={styles.menu} onClick={() => setIsOpen(!isOpen)}>=</button>
       <AccordionMenu isOpen={isOpen} setIsOpen={setIsOpen}/>
     </div>
