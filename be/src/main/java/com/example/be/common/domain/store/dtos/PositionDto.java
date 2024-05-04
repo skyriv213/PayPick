@@ -1,4 +1,4 @@
-package com.example.be.common.domain.store.dto;
+package com.example.be.common.domain.store.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Point {
+public class PositionDto {
 
-    //latitude, x
-    private double lat;
-    //longitude, y
-    private double lng;
+    private Point leftPosition;
+    private Point rightPosition;
+
 }

@@ -2,6 +2,7 @@ package com.example.be.common.domain.store.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.example.be.common.domain.payway.entity.Payment;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -30,7 +31,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath middleCategory = createString("middleCategory");
 
-    public final ListPath<com.example.be.common.domain.payway.entity.Payway, com.example.be.common.domain.payway.entity.QPayway> paywayList = this.<com.example.be.common.domain.payway.entity.Payway, com.example.be.common.domain.payway.entity.QPayway>createList("paywayList", com.example.be.common.domain.payway.entity.Payway.class, com.example.be.common.domain.payway.entity.QPayway.class, PathInits.DIRECT2);
+    public final ListPath<Payment, com.example.be.common.domain.payway.entity.QPayway> paywayList = this.<Payment, com.example.be.common.domain.payway.entity.QPayway>createList("paywayList", Payment.class, com.example.be.common.domain.payway.entity.QPayway.class, PathInits.DIRECT2);
 
     public final StringPath storeAddress = createString("storeAddress");
 

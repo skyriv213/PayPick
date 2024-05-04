@@ -1,9 +1,9 @@
 package com.example.be.common.domain.store.fixture;
 
-import com.example.be.common.domain.store.dto.Point;
-import com.example.be.common.domain.store.dto.PositionRequestDto;
-import com.example.be.common.domain.store.dto.StoreDto;
-import com.example.be.common.domain.store.dto.StoreResponseListDto;
+import com.example.be.common.domain.store.dtos.Point;
+import com.example.be.common.domain.store.dtos.PositionDto;
+import com.example.be.common.domain.store.dtos.StoreDto;
+import com.example.be.common.domain.store.dtos.StoreResponseListDto;
 import com.example.be.common.domain.store.entity.Store;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,13 +19,13 @@ public class StoreFixture {
         .storeAddress("storeAddress")
         .latitude(1.0)
         .longitude(1.0)
-        .paywayList(new ArrayList<>())
+        .paymentList(new ArrayList<>())
         .build();
 
     public static final Point POINT = Point.builder()
         .lat(1.0).lng(1.0)
         .build();
-    public static final PositionRequestDto POSITION_REQUEST_DTO = PositionRequestDto.builder()
+    public static final PositionDto POSITION_REQUEST_DTO = PositionDto.builder()
         .leftPosition(POINT)
         .rightPosition(POINT)
         .build();
@@ -36,7 +36,7 @@ public class StoreFixture {
         .majorCategory("majorCategory")
         .middleCategory("middleCategory")
         .address("address")
-        .paywayList(new ArrayList<>())
+        .paymentList(new ArrayList<>())
         .build();
 
     public static final StoreResponseListDto STORE_RESPONSE_LIST_DTO = StoreResponseListDto.builder()

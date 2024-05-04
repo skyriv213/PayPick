@@ -1,13 +1,12 @@
 package com.example.be.common.domain.store.entity;
 
-import com.example.be.common.domain.payway.entity.Payway;
+import com.example.be.common.domain.payway.entity.Payment;
 import com.querydsl.core.annotations.QueryEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -54,6 +53,6 @@ public class Store {
 
     @OneToMany(mappedBy = "store")
     @Builder.Default
-    private List<Payway> paywayList = new ArrayList<>();
+    private List<Payment> paymentList = new ArrayList<>();
 
 }

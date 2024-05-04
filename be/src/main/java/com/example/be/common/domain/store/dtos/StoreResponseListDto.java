@@ -1,4 +1,4 @@
-package com.example.be.common.domain.store.dto;
+package com.example.be.common.domain.store.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

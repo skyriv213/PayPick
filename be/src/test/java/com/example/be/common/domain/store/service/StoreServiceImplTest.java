@@ -6,13 +6,10 @@ import static com.example.be.common.domain.store.fixture.StoreFixture.STORE_ID;
 import static com.example.be.common.domain.store.fixture.StoreFixture.STORE_RESPONSE_LIST_DTO;
 import static com.example.be.common.domain.store.fixture.StoreFixture.STORE_RESPONSE_LIST_DTO_LIST;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-import com.example.be.common.domain.store.dto.Point;
-import com.example.be.common.domain.store.dto.StoreDto;
-import com.example.be.common.domain.store.dto.StoreResponseListDto;
+import com.example.be.common.domain.store.dtos.StoreDto;
+import com.example.be.common.domain.store.dtos.StoreResponseListDto;
 import com.example.be.common.domain.store.repository.StoreRepository;
 import java.util.List;
 import java.util.Optional;

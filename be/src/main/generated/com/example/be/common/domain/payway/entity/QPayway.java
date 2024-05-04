@@ -14,7 +14,7 @@ import com.querydsl.core.types.dsl.PathInits;
  * QPayway is a Querydsl query type for Payway
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QPayway extends EntityPathBase<Payway> {
+public class QPayway extends EntityPathBase<Payment> {
 
     private static final long serialVersionUID = 119300396L;
 
@@ -31,10 +31,10 @@ public class QPayway extends EntityPathBase<Payway> {
     public final com.example.be.common.domain.store.entity.QStore store;
 
     public QPayway(String variable) {
-        this(Payway.class, forVariable(variable), INITS);
+        this(Payment.class, forVariable(variable), INITS);
     }
 
-    public QPayway(Path<? extends Payway> path) {
+    public QPayway(Path<? extends Payment> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -43,10 +43,10 @@ public class QPayway extends EntityPathBase<Payway> {
     }
 
     public QPayway(PathMetadata metadata, PathInits inits) {
-        this(Payway.class, metadata, inits);
+        this(Payment.class, metadata, inits);
     }
 
-    public QPayway(Class<? extends Payway> type, PathMetadata metadata, PathInits inits) {
+    public QPayway(Class<? extends Payment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.store = inits.isInitialized("store") ? new com.example.be.common.domain.store.entity.QStore(forProperty("store")) : null;
     }

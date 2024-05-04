@@ -1,6 +1,6 @@
 package com.example.be.common.domain.store.repository;
 
-import com.example.be.common.domain.store.dto.StoreResponseListDto;
+import com.example.be.common.domain.store.dtos.StoreResponseListDto;
 import java.util.List;
 
 public interface StoreRepositoryCustom {

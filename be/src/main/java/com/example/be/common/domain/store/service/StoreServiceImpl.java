@@ -1,8 +1,8 @@
 package com.example.be.common.domain.store.service;
 
-import com.example.be.common.domain.store.dto.PositionRequestDto;
-import com.example.be.common.domain.store.dto.StoreDto;
-import com.example.be.common.domain.store.dto.StoreResponseListDto;
+import com.example.be.common.domain.store.dtos.PositionDto;
+import com.example.be.common.domain.store.dtos.StoreDto;
+import com.example.be.common.domain.store.dtos.StoreResponseListDto;
 import com.example.be.common.domain.store.entity.Store;
 import com.example.be.common.domain.store.repository.StoreRepository;
 import java.util.List;
@@ -16,7 +16,7 @@ public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
 
     @Override
-    public List<StoreResponseListDto> getStoreInMap(PositionRequestDto request) {
+    public List<StoreResponseListDto> getStoreInMap(PositionDto request) {
         double leftLatitude = request.getLeftPosition().getLat();
         double leftLongitude = request.getLeftPosition().getLng();
         double rightLatitude = request.getRightPosition().getLat();

@@ -1,6 +1,6 @@
-package com.example.be.common.domain.store.dto;
+package com.example.be.common.domain.store.dtos;
 
-import com.example.be.common.domain.payway.entity.Payway;
+import com.example.be.common.domain.payway.entity.Payment;
 import com.example.be.common.domain.store.entity.Store;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class StoreDto {
 
     private String address;
 
-    private List<Payway> paywayList;
+    private List<Payment> paymentList;
 
     public StoreDto (Store store) {
         this.id = store.getId();
@@ -31,7 +31,7 @@ public class StoreDto {
         this.majorCategory = store.getMajorCategory();
         this.middleCategory = store.getMiddleCategory();
         this.address = store.getStoreAddress();
-        this.paywayList = store.getPaywayList();
+        this.paymentList = store.getPaymentList();
     }
 
 }
