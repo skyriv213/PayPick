@@ -14,7 +14,6 @@ export const info = style({
 });
 
 export const payInfo = style({
-  // padding: '5px',
   display: "flex",
   justifyContent: "space-between"
 });

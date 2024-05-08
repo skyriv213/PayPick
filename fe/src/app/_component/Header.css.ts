@@ -5,14 +5,19 @@ export const container = style({
   display: 'flex',
   justifyContent: "space-between",
   width: '100dvw',
-  maxWidth: '1280px',
+  maxWidth: '540px',
   height: '5dvh',
-  minHeight: '40px',
+  minHeight: '38px',
   maxHeight: '60px',
   borderBottom: '0.5px solid lightGray',
   fontSize: '25px',
   backgroundColor: "white",
   color: global.foreground.color,
+  '@media': {
+    '(max-width: 500px)': {
+      fontSize: '22px',
+    }
+  }
 });
 
 export const logo = style({
@@ -36,11 +41,3 @@ export const menu = style({
   width: '40px',
   height: '100%',
 })
-
-// '@media': {
-//   '(max-width: 1100px)': {
-//     flexDirection: 'row',
-//     marginRight: '10px',
-//     alignItems: 'center',
-//   }
-// }

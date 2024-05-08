@@ -1,6 +1,7 @@
-import {globalStyle, style} from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
 
 export const mapSize = style({
   width: '100dvw',
-  height: '100dvh'
+  maxWidth: '540px',
+  height: '95dvh'
 });

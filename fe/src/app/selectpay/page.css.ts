@@ -3,7 +3,7 @@ import {global} from "@/app/globalTheme.css";
 
 export const container = style({
   width: '100dvw',
-  maxWidth: '1280px',
+  maxWidth: '540px',
   height: 'calc(100dvh - 60px)',
   backgroundColor: 'rgb(248, 249, 253)',
  });
@@ -44,7 +44,7 @@ export const info = style({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  maxWidth: '1280px',
+  maxWidth: '540px',
   height: '10dvh',
   maxHeight: '120px',
   backgroundColor: global.foreground.color,

@@ -8,6 +8,10 @@ interface Props {
 
 const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
 
+  const closeAccordion = () => {
+    setIsOpen(false)
+  }
+
   return (
     <div className={`${styles.container} ${isOpen ? styles.menuOpen : ''}`}>
       <div className={styles.closeButtonBox}>
@@ -15,13 +19,16 @@ const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
       </div>
         <ul className={styles.menuContent}>
           <li>
-            <a href='/selectpay'>결제 수단 선택</a>
+            <Link href='/' onClick={closeAccordion}>홈</Link>
           </li>
           <li>
-            <a href='/'>결제 인증</a>
+            <Link href='/selectpay' onClick={closeAccordion}>결제 수단 선택</Link>
           </li>
           <li>
-            <a href='/'>오류 정보 알리기</a>
+            <Link href='/' onClick={closeAccordion}>결제 인증</Link>
+          </li>
+          <li>
+            <Link href='/report' onClick={closeAccordion}>오류 정보 알리기</Link>
           </li>
         </ul>
     </div>

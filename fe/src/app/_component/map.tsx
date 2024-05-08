@@ -29,9 +29,17 @@ const Map = ({
             minZoom: 10,
             scaleControl: false,
             mapDataControl: false,
-            logoControlOptions: {
-            position: naver.maps.Position.BOTTOM_RIGHT,
+            disableDoubleTapZoom:true,
+            zoomControl:true,
+            zoomControlOptions: {
+                position: naver.maps.Position.BOTTOM_RIGHT,
+                style: naver.maps.ZoomControlStyle.SMALL,
             },
+            logoControlOptions: {
+                position: naver.maps.Position.BOTTOM_LEFT,
+            },
+            
+            
         };
         //새로운 네이버 맵 인스턴스 생성 
         const map = new window.naver.maps.Map(mapId, mapOptions);
@@ -42,11 +50,11 @@ const Map = ({
         }
     };
     
-    useEffect(() => {
-        return () => {
-            mapRef.current?.destroy();
-        };
-    }, []);
+    // useEffect(() => {
+    //     return () => {
+    //         mapRef.current?.destroy();
+    //     };
+    // }, []);
 
     return (
         <>

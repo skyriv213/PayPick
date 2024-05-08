@@ -21,10 +21,15 @@ const useStore = () => {
       queryClient.setQueryData([CURRENT_STORE_KEY], null);
     }, []);
 
+    // const setSelectStore = useCallback((store: Store, id: string) => {
+    //   queryClient.setQueryData([`store/${id}`], store);
+    // }, []);
+
   return {
     initializeStores,
     setCurrentStore,
     clearCurrentStore,
+    // setSelectStore
   };
 }
 

@@ -1,7 +1,7 @@
 import {style} from "@vanilla-extract/css";
 
 export const wrapper = style({
-  maxWidth: '1280px',
+  maxWidth: '540px',
   margin: '0 auto',
   width: '100%',
   backgroundColor: 'white',

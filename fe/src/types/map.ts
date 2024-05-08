@@ -2,10 +2,7 @@ type Lat = number;
 type Lng = number;
 export type Coordinates = [Lat, Lng];
 
-export type mapCorner = {
-  leftPosition: { lat: Lat, lng: Lng },
-  rightPosition: { lat: Lat, lng: Lng }
-};
+export type Corner = string
 
 export type NaverMap = naver.maps.Map;
 
