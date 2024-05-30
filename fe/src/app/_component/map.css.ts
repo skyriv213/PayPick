@@ -1,7 +1,7 @@
 import {style} from "@vanilla-extract/css";
 
 export const mapSize = style({
-  width: '100dvw',
+  width: '100%',
   maxWidth: '540px',
   height: '95dvh'
 });

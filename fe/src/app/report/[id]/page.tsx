@@ -1,11 +1,23 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as styles from './page.css';
+import { useSearchParams } from 'next/navigation';
 
-const ReportId = () => {
+const Page = () => {
 
   const [showInput, setShowInput] = useState(false);
+  const [storeName, setStoreName] = useState('');
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const name = searchParams.get('name');
+
+      if (typeof name === 'string') {
+        setStoreName(name);
+        console.log(storeName);
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === 'other') {
@@ -21,7 +33,7 @@ const ReportId = () => {
       <ul className={styles.payWrapper}>
         <label>매장명</label>
         <li>
-          <input className={styles.inputBox} type="text" readOnly/>
+          <input className={styles.inputBox} type="text" value={storeName} readOnly/>
         </li>
         <label>오류 내용</label>
         <li>
@@ -47,4 +59,4 @@ const ReportId = () => {
   )
 }
 
-export default ReportId
+export default Page

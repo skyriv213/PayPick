@@ -71,3 +71,8 @@ globalStyle('ul, ol', {
   padding: '0',
   margin: '0',
 })
+
+globalStyle('button', {
+  border: 'none',
+  textDecoration: 'none',
+})

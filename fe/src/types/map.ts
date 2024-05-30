@@ -2,18 +2,16 @@ type Lat = number;
 type Lng = number;
 export type Coordinates = [Lat, Lng];
 
-export type Corner = string
-
 export type NaverMap = naver.maps.Map;
 
-export type Marker = {
+export interface Marker {
     map?: NaverMap;
     coordinates : Coordinates
     // icon: SvgIcon;
-    onClick?: () => void;
+    onClick: () => void;
   };
 
-  export type SvgIcon = {
+  export interface SvgIcon {
     // isSelected: boolean
     url: string;
     size: naver.maps.Size;

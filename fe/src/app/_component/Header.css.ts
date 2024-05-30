@@ -8,7 +8,7 @@ export const container = style({
   maxWidth: '540px',
   height: '5dvh',
   minHeight: '38px',
-  maxHeight: '60px',
+  maxHeight: '55px',
   borderBottom: '0.5px solid lightGray',
   fontSize: '25px',
   backgroundColor: "white",
@@ -19,6 +19,8 @@ export const container = style({
     }
   }
 });
+
+
 
 export const logo = style({
   display: 'flex',

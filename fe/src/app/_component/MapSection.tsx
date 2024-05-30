@@ -3,35 +3,47 @@
 import Map from './map';
 import { NaverMap } from '@/types/map';
 import Markers from './markers';
-import { HydrationBoundary, dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate, QueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import useMap, { INITIAL_CENTER, INITIAL_ZOOM, MAP_KEY } from '@/hooks/useMap';
+import useMap, { INITIAL_ZOOM } from '@/hooks/useMap';
 import useStore from '@/hooks/useStore';
 import StoreDetail from './StoreDetail';
+import { useModalStore } from '@/store/modal';
+import { useEffect } from 'react';
 
 
 const MapSection = () => {
     const queryClient = new QueryClient()
     const dehydratedState = dehydrate(queryClient)
-
-    const { initializeMap } = useMap();
+    const { rerenderModal } = useModalStore()
+    const { initializeMap, getGeoLocation, center } = useMap();
     const { clearCurrentStore } = useStore()
 
     const onLoadMap = (map: NaverMap) => {
         initializeMap(map);
-        console.log(map);
         naver.maps.Event.addListener(map, 'click', clearCurrentStore);
-    };
-
-    const data = queryClient.getQueryData<NaverMap>([MAP_KEY])
-    console.log(data);
-
+        naver.maps.Event.once
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        naver.maps.Event.addListener(map, "bounds_changed", function () { // 디바운스 블로그 소재
+        if (timer) {
+            clearTimeout(timer);
+            }
+            timer = setTimeout(function () {
+            rerenderModal(true)
+          },100);
+        });
+    }
+    
+    useEffect(() => {
+        getGeoLocation();
+      }, []);
+    
     return (
         <>
             <HydrationBoundary state={dehydratedState}>
                 <Map onLoad = {onLoadMap}
                 initialZoom={INITIAL_ZOOM}
-                initialCenter={INITIAL_CENTER}/>
+                initialCenter={center}/>
                 <Markers />
                 <StoreDetail />
             </HydrationBoundary>
@@ -40,7 +52,6 @@ const MapSection = () => {
 };
 
 export default MapSection;
-
 
 // const router = useRouter();
     

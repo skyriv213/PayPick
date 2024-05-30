@@ -4,18 +4,18 @@ import Script from "next/script";
 import { useEffect, useRef } from "react";
 import * as styles from './map.css'
 import { NaverMap, Coordinates } from "@/types/map";
-import { INITIAL_CENTER, INITIAL_ZOOM } from "@/hooks/useMap";
+import { INITIAL_ZOOM } from "@/hooks/useMap";
 
 type Props = {
     mapId?: string;
-    initialCenter?: Coordinates
+    initialCenter: Coordinates
     initialZoom: number;
     onLoad?: (map: naver.maps.Map) => void;
 };
 
 const Map = ({
     mapId = 'map',
-    initialCenter = INITIAL_CENTER,
+    initialCenter,
     initialZoom = INITIAL_ZOOM,
     onLoad,
 }: Props) => {
@@ -38,8 +38,6 @@ const Map = ({
             logoControlOptions: {
                 position: naver.maps.Position.BOTTOM_LEFT,
             },
-            
-            
         };
         //새로운 네이버 맵 인스턴스 생성 
         const map = new window.naver.maps.Map(mapId, mapOptions);
@@ -49,8 +47,14 @@ const Map = ({
             onLoad(map);
         }
     };
-    
-    // useEffect(() => {
+
+    useEffect(() => {
+        if (mapRef.current) {
+            mapRef.current.setCenter(new naver.maps.LatLng(...initialCenter));
+        }
+    }, [initialCenter]);
+
+    // useEffect(() => { // next/Link 사용시 destroy하면 다른 페이지 이동했다가 다시 홈화면으로 왔을시 빈화면 렌더링 되는 문제로 주석 처리
     //     return () => {
     //         mapRef.current?.destroy();
     //     };

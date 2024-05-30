@@ -1,19 +1,12 @@
-export type Store = {
+export interface Store {
   id: number;
-  name: string;
-  majorCategory?: string;
-  middleCategory?: string;
-  address?: string;
   lat: number;
   lng: number;
-  coordinates: [number, number]
-  paywayList?: string | string[]
 };
 
-// export type Stores = {
-//   id: number;
-//   name: string;
-//   middleCategory: string;
-//   lat: number;
-//   lng: number;
-// };
+export interface storeData extends Store {
+  name: string;
+  middleCategory: string;
+  address: string;
+  paywayList: string | string[];
+}
