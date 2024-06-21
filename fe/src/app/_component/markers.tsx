@@ -66,7 +66,7 @@ const Markers = () => {
           key={currentStore.id}
         />
       )}
-      <RerenderButton refetchStores={refetch}/>
+      <RerenderButton refetchMarkers={refetch}/>
     </>
   );
 };

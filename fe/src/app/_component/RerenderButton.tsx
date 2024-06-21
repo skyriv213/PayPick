@@ -8,15 +8,15 @@ import { Store } from '@/types/store';
 type RefetchFunction = (options?: RefetchOptions) => Promise<QueryObserverResult<Store[], Error>>;
 
 type Props = {
-  refetchStores: RefetchFunction;
+  refetchMarkers: RefetchFunction;
 }
 
-const RerenderButton = ({ refetchStores }: Props) => {
+const RerenderButton = ({ refetchMarkers }: Props) => {
   const { rerenderShow, rerenderModal } = useModalStore();
 
   const onClick = async () => {
     try {
-      await refetchStores(); // refetchStores 함수 실행
+      await refetchMarkers(); // refetchMarkers 함수 실행
       rerenderModal(false);
     } catch (error) {
       console.error(error);

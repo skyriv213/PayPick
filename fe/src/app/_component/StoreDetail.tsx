@@ -5,7 +5,6 @@ import Modal from './Modal';
 import { Store, storeData } from '@/types/store';
 import { CURRENT_STORE_KEY } from '@/hooks/useStore';
 import { getApi } from '@/hooks/api';
-import { useEffect } from 'react';
 
  const StoreDetail = () => {
 
@@ -14,7 +13,7 @@ import { useEffect } from 'react';
   const { data: marker } = useQuery<Store>({ queryKey: [CURRENT_STORE_KEY]});
   const id = marker?.id
 
-  async function getStore(id:number) {
+  async function getStore(id:string) {
     const url = (`http://localhost:8080/store/${id}`)
     return getApi(url);
   }
