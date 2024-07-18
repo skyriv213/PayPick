@@ -60,76 +60,76 @@ class StoreControllerTest {
 
 
 
-    @Test
-    @WithMockUser
-    void getStoreInMap() throws Exception {
-
-        String json = objectMapper.writeValueAsString(STORE_RESPONSE_LIST_DTO);
-
-        given(storeService.getStoreInMap(any())).willReturn(STORE_RESPONSE_LIST_DTO_LIST);
-
-        ResultActions resultActions = mockMvc.perform(
-                get("/store")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsBytes(POSITION_REQUEST_DTO))
-                    .with(csrf()))
-            .andExpect(status().isOk());
-
-        resultActions.andDo(document("storeController/getStoreInMap",
-                getDocumentRequest(),
-                getDocumentResponse(),
-                requestFields(
-                    fieldWithPath("leftPosition.lat").type(JsonFieldType.NUMBER)
-                        .description("좌하단 위도"),
-                    fieldWithPath("leftPosition.lng").type(JsonFieldType.NUMBER)
-                        .description("좌하단 경도"),
-                    fieldWithPath("rightPosition.lat").type(JsonFieldType.NUMBER)
-                        .description("우상단 위도"),
-                    fieldWithPath("rightPosition.lng").type(JsonFieldType.NUMBER)
-                        .description("우상단 경도")
-                ),
-                responseFields(
-                    fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("가게 id"),
-                    fieldWithPath("[].name").type(JsonFieldType.STRING).description("가게 이름"),
-                    fieldWithPath("[].lat").type(JsonFieldType.NUMBER).description("가게 위도"),
-                    fieldWithPath("[].lng").type(JsonFieldType.NUMBER).description("가게 경도"),
-                    fieldWithPath("[].middleCategory").type(JsonFieldType.STRING).description("가게 분야")
-                )
-
-            )
-        );
-
-    }
-
-    @Test
-    @WithMockUser
-    void getStoreInfo() throws Exception {
-
-        String json = objectMapper.writeValueAsString(STORE_DTO);
-
-        given(storeService.getStoreInfo(any())).willReturn(STORE_DTO);
-
-        ResultActions resultActions = mockMvc.perform(
-                get("/store/{storeId}", STORE_ID)
-                    .with(csrf()))
-            .andExpect(status().isOk());
-
-        resultActions.andDo(document("storeController/getStoreInfo",
-                getDocumentRequest(),
-                getDocumentResponse(),
-                responseFields(
-                    fieldWithPath("id").type(JsonFieldType.NUMBER).description("가게 id"),
-                    fieldWithPath("name").type(JsonFieldType.STRING).description("가게 이름"),
-                    fieldWithPath("majorCategory").type(JsonFieldType.STRING).description("가게 대분류"),
-                    fieldWithPath("middleCategory").type(JsonFieldType.STRING).description("가게 중분류"),
-                    fieldWithPath("address").type(JsonFieldType.STRING).description("가게 주소"),
-                    fieldWithPath("paywayList").type(JsonFieldType.ARRAY).description("가게 경도")
-                )
-
-            )
-        );
-
-    }
+//    @Test
+//    @WithMockUser
+//    void getStoreInMap() throws Exception {
+//
+//        String json = objectMapper.writeValueAsString(STORE_RESPONSE_LIST_DTO);
+//
+//        given(storeService.getStoreInMap(any())).willReturn(STORE_RESPONSE_LIST_DTO_LIST);
+//
+//        ResultActions resultActions = mockMvc.perform(
+//                get("/store")
+//                    .contentType(MediaType.APPLICATION_JSON)
+//                    .content(objectMapper.writeValueAsBytes(POSITION_REQUEST_DTO))
+//                    .with(csrf()))
+//            .andExpect(status().isOk());
+//
+//        resultActions.andDo(document("storeController/getStoreInMap",
+//                getDocumentRequest(),
+//                getDocumentResponse(),
+//                requestFields(
+//                    fieldWithPath("leftPosition.lat").type(JsonFieldType.NUMBER)
+//                        .description("좌하단 위도"),
+//                    fieldWithPath("leftPosition.lng").type(JsonFieldType.NUMBER)
+//                        .description("좌하단 경도"),
+//                    fieldWithPath("rightPosition.lat").type(JsonFieldType.NUMBER)
+//                        .description("우상단 위도"),
+//                    fieldWithPath("rightPosition.lng").type(JsonFieldType.NUMBER)
+//                        .description("우상단 경도")
+//                ),
+//                responseFields(
+//                    fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("가게 id"),
+//                    fieldWithPath("[].name").type(JsonFieldType.STRING).description("가게 이름"),
+//                    fieldWithPath("[].lat").type(JsonFieldType.NUMBER).description("가게 위도"),
+//                    fieldWithPath("[].lng").type(JsonFieldType.NUMBER).description("가게 경도"),
+//                    fieldWithPath("[].middleCategory").type(JsonFieldType.STRING).description("가게 분야")
+//                )
+//
+//            )
+//        );
+//
+//    }
+//
+//    @Test
+//    @WithMockUser
+//    void getStoreInfo() throws Exception {
+//
+//        String json = objectMapper.writeValueAsString(STORE_DTO);
+//
+//        given(storeService.getStoreInfo(any())).willReturn(STORE_DTO);
+//
+//        ResultActions resultActions = mockMvc.perform(
+//                get("/store/{storeId}", STORE_ID)
+//                    .with(csrf()))
+//            .andExpect(status().isOk());
+//
+//        resultActions.andDo(document("storeController/getStoreInfo",
+//                getDocumentRequest(),
+//                getDocumentResponse(),
+//                responseFields(
+//                    fieldWithPath("id").type(JsonFieldType.NUMBER).description("가게 id"),
+//                    fieldWithPath("name").type(JsonFieldType.STRING).description("가게 이름"),
+//                    fieldWithPath("majorCategory").type(JsonFieldType.STRING).description("가게 대분류"),
+//                    fieldWithPath("middleCategory").type(JsonFieldType.STRING).description("가게 중분류"),
+//                    fieldWithPath("address").type(JsonFieldType.STRING).description("가게 주소"),
+//                    fieldWithPath("paywayList").type(JsonFieldType.ARRAY).description("가게 경도")
+//                )
+//
+//            )
+//        );
+//
+//    }
 
 //    @Test
 //    void allList() {

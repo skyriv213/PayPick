@@ -16,7 +16,7 @@ public class StoreFixture {
         .storeName("storeName")
         .majorCategory("majorCategory")
         .middleCategory("middleCategory")
-        .storeAddress("storeAddress")
+        .roadAddress("storeAddress")
         .latitude(1.0)
         .longitude(1.0)
         .paymentList(new ArrayList<>())

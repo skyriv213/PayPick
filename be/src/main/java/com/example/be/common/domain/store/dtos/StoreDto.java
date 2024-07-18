@@ -30,7 +30,7 @@ public class StoreDto {
         this.name = store.getStoreName();
         this.majorCategory = store.getMajorCategory();
         this.middleCategory = store.getMiddleCategory();
-        this.address = store.getStoreAddress();
+        this.address = store.getRoadAddress();
         this.paymentList = store.getPaymentList();
     }
 

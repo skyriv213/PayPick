@@ -30,8 +30,8 @@ public class PaymentController {
         @RequestBody PaymentRequest paymentDto) {
         return RESPONSE_OK;
     }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<StatusResponse> deleteStorePayment(@PathVariable("id") Long storeId,
-        )
+//
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<StatusResponse> deleteStorePayment(@PathVariable("id") Long storeId,
+//        )
 }

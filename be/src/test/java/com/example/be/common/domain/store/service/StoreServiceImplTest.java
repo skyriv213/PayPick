@@ -55,7 +55,7 @@ class StoreServiceImplTest {
         StoreDto storeInfo = storeService.getStoreInfo(STORE_ID);
         assertThat(storeInfo).isNotNull(); // 객체가 null이 아님을 확인
         assertThat(storeInfo.getName()).isEqualTo(STORE.getStoreName());
-        assertThat(storeInfo.getAddress()).isEqualTo(STORE.getStoreAddress());
+        assertThat(storeInfo.getAddress()).isEqualTo(STORE.getRoadAddress());
 
     }
     
