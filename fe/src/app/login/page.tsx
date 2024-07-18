@@ -1,3 +1,5 @@
+"use client"
+
 import * as styles from './page.css'
 import useLoginLogic from '@/hooks/useLoginLogic';
 import { useState } from 'react';
