@@ -15,7 +15,7 @@ const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
   return (
     <div className={`${styles.container} ${isOpen ? styles.menuOpen : ''}`}>
       <div className={styles.closeButtonBox}>
-        <button className={styles.closeButton} onClick={() => setIsOpen(!isOpen)}>X</button>
+        <div className={styles.closeButton} onClick={() => setIsOpen(!isOpen)}>X</div>
       </div>
         <ul className={styles.menuContent}>
           <li>

@@ -47,7 +47,7 @@ export const inputBox = style({
   selectors: {
     '&::placeholder': {
       color: global.foreground.color,
-      fontSize: '12px'
+      opacity: 0.7,
     },
   },
  });

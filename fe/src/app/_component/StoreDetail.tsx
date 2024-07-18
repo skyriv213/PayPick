@@ -13,7 +13,7 @@ import { getApi } from '@/hooks/api';
   const { data: marker } = useQuery<Store>({ queryKey: [CURRENT_STORE_KEY]});
   const id = marker?.id
 
-  async function getStore(id:string) {
+  async function getStore(id:number) {
     const url = (`http://localhost:8080/store/${id}`)
     return getApi(url);
   }

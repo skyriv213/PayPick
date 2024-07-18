@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className={styles.container}>
       <Link href={'/'} className={styles.logo}>Paypick</Link>
-      <button className={styles.menu} onClick={() => setIsOpen(!isOpen)}>=</button>
+      <div className={styles.menu} onClick={() => setIsOpen(!isOpen)}>=</div>
       <AccordionMenu isOpen={isOpen} setIsOpen={setIsOpen}/>
     </div>
   )

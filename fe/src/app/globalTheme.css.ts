@@ -7,6 +7,9 @@ export const global = createGlobalThemeContract({
   foreground: {
     color: 'fg-color'
   },
+  click: {
+    color: 'click-color'
+  }
 })
 
 createGlobalTheme(':root', global, {
@@ -16,6 +19,9 @@ createGlobalTheme(':root', global, {
   foreground: {
     color: 'rgb(61, 108, 229)'
   },
+  click: {
+    color: 'rgb(41, 88, 209)'
+  }
 });
 
 // const darkGlobalTheme = {
@@ -76,3 +82,18 @@ globalStyle('button', {
   border: 'none',
   textDecoration: 'none',
 })
+
+globalStyle('button:active', {
+  backgroundColor: global.click.color,
+});
+
+globalStyle('input', {
+  margin: 0,
+  padding: 0,
+  border: 0,
+  outline: 'none',
+  boxSizing: 'border-box',
+  background: 'none',
+  color: 'inherit',
+  font: 'inherit',
+});

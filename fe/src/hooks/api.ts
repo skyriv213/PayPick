@@ -1,3 +1,5 @@
+export const baseUrl = `http://localhost:8080`
+
 export async function getApi (url:string) {
   try {
     const res = await fetch(url);
