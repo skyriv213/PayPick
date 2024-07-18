@@ -1,5 +1,5 @@
 export interface Store {
-  id: number;
+  id: string;
   lat: number;
   lng: number;
 };

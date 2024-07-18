@@ -8,7 +8,6 @@ export const MAP_KEY = "map"
 
  const useMap = () => {
   const queryClient = useQueryClient()
-  const [center, setCenter] = useState<Coordinates>(INITIAL_CENTER);
 
   const initializeMap = (map: NaverMap) => {
     queryClient.setQueryData([MAP_KEY], map);
@@ -38,6 +37,8 @@ export const MAP_KEY = "map"
     return { boundary };
   }
 
+  const [center, setCenter] = useState<Coordinates>(INITIAL_CENTER);
+
   const getGeoLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -64,4 +65,4 @@ export const MAP_KEY = "map"
   };
 };
 
-export default useMap
+export default useMap;

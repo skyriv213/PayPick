@@ -26,8 +26,8 @@ const Report = () => {
         <label>오류 내용</label>
         <li>
           <select className={styles.inputBox} name="error" onChange={handleChange}>
-            <option value="possible">애플페이 결제가 가능한 곳이에요</option>
             <option value="impossible">애플페이 결제가 불가능한 곳이에요</option>
+            <option value="possible">애플페이 결제가 가능한 곳이에요</option>
             <option value="different">매장 이름이 실제와 달라요</option>
             <option value="noThere">없는 매장이에요</option>
             <option value="other">기타</option>
