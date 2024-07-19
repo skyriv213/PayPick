@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ReportRepository extends JpaRepository<Report, Long>, ReportRepositoryCustom {
 
 
-  boolean existsByStore(Long StoreId);
+  boolean existsByStoreId(Long StoreId);
 }

@@ -22,7 +22,7 @@ public class ReportServiceImpl implements ReportService {
   @Override
   @Transactional
   public void reportExistStore(Long storeId, ReportStoreDto reportStoreDto) {
-    if (reportRepository.existsByStore(storeId)) {
+    if (reportRepository.existsByStoreId(storeId)) {
        Report report = new Report(reportStoreDto);
        reportRepository.save(report);
     }
