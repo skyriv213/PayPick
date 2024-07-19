@@ -10,7 +10,8 @@ export const container = style({
 
 export const info = style({
   display: 'flex',
-  padding: '3dvh 3dvw',
+  marginTop: '16px',
+  padding: '16px 20px',
   fontSize: '18px',
   fontWeight: '800',
  });

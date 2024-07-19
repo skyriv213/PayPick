@@ -10,7 +10,7 @@ export async function getApi (url:string) {
   }
 }
 
-export async function postApi (url:string, newData:string) {
+export async function postApi (url:string, newData:string | object) {
     try {
       const res = await fetch(url, {
         method: 'POST',
