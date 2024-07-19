@@ -12,5 +12,7 @@ public interface StoreRepository extends JpaRepository<Store, Long>, StoreReposi
 //    List<StoreResponseListDto> findAllStoreInMap(double leftX, double leftY, double rightX,
 //        double rightY);
 
+  Store findByStoreName(String storeName);
+
 
 }

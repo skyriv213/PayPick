@@ -1,6 +1,8 @@
 package com.example.be.common.domain.store.entity;
 
 import com.example.be.common.domain.payway.entity.Payment;
+import com.example.be.common.domain.report.entity.Report;
+import com.example.be.common.domain.store.dtos.StoreUpdateDto;
 import com.querydsl.core.annotations.QueryEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -56,4 +58,20 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Payment> paymentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Report> reports = new ArrayList<>();
+
+
+    public void updateByDto(StoreUpdateDto storeDto) {
+        this.address = storeDto.getAddress();
+        this.paymentList = storeDto.getPaymentList();
+        this.latitude = storeDto.getLat();
+        this.longitude = storeDto.getLng();
+        this.majorCategory = storeDto.getMajorCategory();
+        this.middleCategory = storeDto.getMiddleCategory();
+        this.storeName = storeDto.getName();
+
+    }
 }

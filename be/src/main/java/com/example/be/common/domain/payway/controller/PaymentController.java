@@ -5,6 +5,7 @@ import static com.example.be.common.domain.payway.controller.PaymentController.P
 import static com.example.be.common.utils.HttpResponseEntity.RESPONSE_OK;
 
 import com.example.be.common.domain.payway.dtos.PaymentRequest;
+import com.example.be.common.domain.payway.service.PaymentService;
 import com.example.be.common.dto.StatusResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentController {
 
     public static final String PAYMENT_URI = "/payment";
+
+    private final PaymentService paymentService;
 
     //추가 및 삭제
 
