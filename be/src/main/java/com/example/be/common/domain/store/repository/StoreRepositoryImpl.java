@@ -35,7 +35,7 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom {
                 (store.latitude.goe(leftLatitude).and(store.latitude.loe(rightLatitude)))
                     .and(
                         store.longitude.goe(leftLongitude).and(store.longitude.loe(rightLongitude)))
-            ).fetch();
+            ).limit(200).fetch();
         return storeResponseListDtos;
 
 
