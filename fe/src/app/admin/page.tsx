@@ -1,10 +1,10 @@
 "use client"
 
 import * as styles from './page.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { reportData } from '@/types/store';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { baseUrl } from '@/hooks/api';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { getApi } from '@/hooks/api';
 
 interface sendDataProps {
   method: string;
@@ -12,8 +12,8 @@ interface sendDataProps {
   data?: Partial<reportData>;
 }
 
-const sendData = async ({method, reportId, data}:sendDataProps) => {
-  const url = `${baseUrl}/admin/${reportId}`;
+const sendData = async ({method, reportId, data}: sendDataProps) => {
+  const url = `/admin/${reportId}`;
   
   const options: RequestInit = {
     method,
@@ -34,68 +34,7 @@ const sendData = async ({method, reportId, data}:sendDataProps) => {
 
 const Page = () => {
 
-  const [stores, setStores] = useState<reportData[]>([
-    {
-      reportId: 1,
-      errorType : '기타',
-      errorContent : '기타 클릭시 입력한 텍스트 나오는 칸',
-      id: 1,
-      name: "Store 1",
-      middleCategory: "Mobile Phones",
-      lat: 37.7749,
-      lng: 122.4194,
-      address: "123 Main St, San Francisco, CA",
-      paywayList: ['애플페이']
-    },
-    {
-      reportId: 2,
-      errorType : '애플페이 결제를 지원하지 않는 매장이에요',
-      errorContent : '기타 클릭시 입력한 텍스트 나오는 칸',
-      id: 2,
-      name: "Store 2",
-      middleCategory: "Vegetables",
-      lat: 40.7128,
-      lng: 74.0060,
-      address: "456 Market St, New York, NY",
-      paywayList: []
-    },
-    {
-      reportId: 3,
-      errorType : '기타',
-      errorContent : '기타 클릭시 입력한 텍스트 나오는 칸이어부이ㅓㅂ주',
-      id: 3,
-      name: "",
-      middleCategory: "Men's Wear",
-      lat: 34.0522,
-      lng: 118.2437,
-      address: "789 Sunset Blvd, Los Angeles, CA",
-      paywayList: []
-    },
-    {
-      reportId: 4,
-      errorType : '애플페이 결제를 지원하지 않는 매장이에요',
-      errorContent : '기타 클릭시 입력한 텍스트 나오는 칸이어부이ㅓㅂ주',
-      id: 4,
-      name: "Store 4",
-      middleCategory: "Furniture",
-      lat: 41.8781,
-      lng: 87.6298,
-      address: "101 State St, Chicago, IL",
-      paywayList: []
-    },
-    {
-      reportId: 5,
-      errorType : '애플페이 결제를 지원하지 않는 기타이에요',
-      errorContent : '기타 클릭시 입력한 텍스트 나오는 나오는 칸이어부이ㅓㅂ주',
-      id: 5,
-      name: "Store 5",
-      middleCategory: "Equipment",
-      lat: 29.7604,
-      lng: 95.3698,
-      address: "202 Bay Area Blvd, Houston, TX",
-      paywayList: []
-    }
-  ]);
+  const [stores, setStores] = useState<reportData[]>([]);
 
   const handleInputChange = (index: number, field: string, value: any) => {
     const newStores = [...stores];
@@ -107,10 +46,38 @@ const Page = () => {
 
   const mutation = useMutation({
     mutationFn: sendData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['stores'] });
+    onSuccess: (data, variables) => {
+      if (variables.method === 'DELETE') {
+        setStores(prevStores => prevStores.filter(store => store.reportId !== variables.reportId));
+        // 삭제 요청 후 성공 시 해당 데이터를 stores에서 제거
+      } else if (variables.method === 'PATCH' || variables.method === 'POST') {
+        queryClient.invalidateQueries({ queryKey: ['adminStores'] });
+        // 수정 또는 새로 등록 후 성공 시 데이터를 새로 받아와서 stores를 업데이트
+      }
     },
+    onError: (error) => {
+      console.error('Mutation error:', error);
+    }
   });
+
+  async function getReport() {
+    return getApi('/admin');
+  }
+
+  const { data: reports, isLoading, isError } = useQuery<reportData[]>({ 
+    queryKey: [`/admin`],
+    queryFn: () => getReport(),
+    staleTime: 60 * 1000, // 1분
+  });
+
+  useEffect(() => {
+    if (reports) {
+      setStores(reports);
+    }
+  }, [reports]);
+  
+  if (isLoading) return <div className={styles.errorComponent}> Loading...</div>;
+  if (isError) return <div className={styles.errorComponent}>Error loading data</div>;
 
   return (
     <div className={styles.container}>
@@ -126,42 +93,42 @@ const Page = () => {
               className={styles.inputBox}
               type="text"
               value={store.name}
-              placeholder="Enter text"
+              placeholder="상점 이름"
               onChange={(e) => handleInputChange(index, 'name', (e.target.value))}
             />
             <input
               className={styles.inputBox}
               type="text"
               value={store.middleCategory}
-              placeholder="Enter text"
+              placeholder="middleCategory"
               onChange={(e) => handleInputChange(index, 'middleCategory', e.target.value)}
             />
             <input
               className={styles.inputBox}
               type="text"
               value={store.lat}
-              placeholder="Enter text"
+              placeholder="lat"
               onChange={(e) => handleInputChange(index, 'lat', (e.target.value))}
             />
             <input
               className={styles.inputBox}
               type="text"
               value={store.lng}
-              placeholder="Enter text"
+              placeholder="lng"
               onChange={(e) => handleInputChange(index, 'lng', (e.target.value))}
             />
             <input
               className={styles.inputBox}
               type="text"
               value={store.address}
-              placeholder="Enter text"
+              placeholder="주소"
               onChange={(e) => handleInputChange(index, 'address', e.target.value)}
             />
             <input
               className={styles.inputBox}
               type="text"
               value={store.paywayList}
-              placeholder="Enter text"
+              placeholder="페이"
               onChange={(e) => handleInputChange(index, 'paywayList', e.target.value.split(','))}
             />
             <div className={styles.buttonContainer}>
@@ -173,8 +140,11 @@ const Page = () => {
                 )}
               </div>
               <div className={styles.buttonBox}>
-                <button className={styles.dataButton} onClick={() => mutation.mutate({ method: 'PATCH', reportId: store.reportId })}>수정</button>
-                <button className={styles.dataButton} onClick={() => mutation.mutate({ method: 'POST', reportId: store.reportId })}>새로 등록</button>
+              {!store.lng || !store.lat  ? (
+                  <button className={styles.dataButton} onClick={() => mutation.mutate({ method: 'POST', reportId: store.reportId })}>새로 등록</button>
+                ) : (
+                  <button className={styles.dataButton} onClick={() => mutation.mutate({ method: 'PATCH', reportId: store.reportId })}>수정</button>
+                )}
               </div>
             </div>
           </div>

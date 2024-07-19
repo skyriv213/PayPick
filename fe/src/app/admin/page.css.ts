@@ -62,3 +62,11 @@ export const inputBox = style({
   color: 'white',
   background: global.foreground.color,
  });
+
+ export const errorComponent = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100dvh'
+ })
