@@ -1,6 +1,59 @@
+//package com.example.be.common.config;
+//
+//
+//import java.util.Arrays;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.web.cors.CorsConfiguration;
+//import org.springframework.web.cors.CorsConfigurationSource;
+//import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+//
+//@EnableWebSecurity
+//@Configuration
+//public class SecurityConfig   {
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//
+//        httpSecurity.cors((cors) -> cors.configurationSource(corsConfigurationSource()));
+//
+//        httpSecurity.csrf((csrf) -> csrf.disable());
+//
+//        httpSecurity.headers((headers) ->
+//            headers.xssProtection(Customizer.withDefaults())
+//                .contentSecurityPolicy(Customizer.withDefaults()));
+//
+//
+//        httpSecurity.authorizeHttpRequests((auth) ->
+//            auth
+//                .requestMatchers("/store/**").permitAll()
+//                .anyRequest().authenticated());
+//
+//        return httpSecurity.build();
+//    }
+//
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("*"));
+//
+////        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowCredentials(true);
+//        configuration.setExposedHeaders(Arrays.asList("Location"));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
+//}
 package com.example.be.common.config;
 
-
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,13 +61,15 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig   {
+public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -27,11 +82,16 @@ public class SecurityConfig   {
             headers.xssProtection(Customizer.withDefaults())
                 .contentSecurityPolicy(Customizer.withDefaults()));
 
-
         httpSecurity.authorizeHttpRequests((auth) ->
             auth
                 .requestMatchers("/store/**").permitAll()
                 .anyRequest().authenticated());
+
+        httpSecurity.exceptionHandling((exceptionHandling) ->
+            exceptionHandling
+                .accessDeniedHandler(accessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint())
+        );
 
         return httpSecurity.build();
     }
@@ -41,13 +101,25 @@ public class SecurityConfig   {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
-
-//        configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setExposedHeaders(Arrays.asList("Location"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied!");
+        };
+    }
+
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized!");
+        };
     }
 }

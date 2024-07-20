@@ -2,6 +2,7 @@ package com.example.be.common.domain.payway.entity;
 
 
 import com.example.be.common.domain.store.entity.Store;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,7 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "store_id")
+    @JsonManagedReference
     private Store store;
 
 

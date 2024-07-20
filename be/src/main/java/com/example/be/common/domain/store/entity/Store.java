@@ -3,6 +3,8 @@ package com.example.be.common.domain.store.entity;
 import com.example.be.common.domain.payway.entity.Payment;
 import com.example.be.common.domain.report.entity.Report;
 import com.example.be.common.domain.store.dtos.StoreUpdateDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.querydsl.core.annotations.QueryEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -54,15 +56,15 @@ public class Store {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonManagedReference
     private List<Payment> paymentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @JsonIgnore
     private List<Report> reports = new ArrayList<>();
-
 
     public void updateByDto(StoreUpdateDto storeDto) {
         this.address = storeDto.getAddress();
@@ -72,6 +74,5 @@ public class Store {
         this.majorCategory = storeDto.getMajorCategory();
         this.middleCategory = storeDto.getMiddleCategory();
         this.storeName = storeDto.getName();
-
     }
 }
