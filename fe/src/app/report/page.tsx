@@ -10,9 +10,9 @@ const Report = () => {
 
   const [showInput, setShowInput] = useState(false);
   const [formData, setFormData] = useState({
-    storeName: '',
-    errorMsg: '',
-    otherError: ''
+    storeName: "",
+    errorMsg: "impossible",
+    otherError: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -33,29 +33,31 @@ const Report = () => {
 
     const sendingData = {
       storeName: formData.storeName,
-      error: formData.errorMsg,
-      otherError: showInput ? formData.otherError : ''
+      errorType: formData.errorMsg,
+      errorContent: showInput ? formData.otherError : ''
     };
 
     if(formData.storeName === ''){
       alert('매장명을 입력해주세요!')
       return
     }
-
     try {
-      const response = await postApi(`/report`, sendingData);
-
+      const response = await postApi('/report', sendingData);
+      
+  
       if (response.ok) {
-        router.push('/')
+        // 응답 상태 코드가 200-299 범위에 있을 때
         console.log('전송 성공');
-        alert('공유해주셔서 감사합니다! 문제를 확인하고 조치하도록 하겠습니다.')
+        alert('공유해주셔서 감사합니다! 문제를 확인하고 조치하도록 하겠습니다.');
+        router.push('/');
       } else {
-        console.error('전송 실패');
-        alert('서버에 문제가 생겨 공유가 되지 않았습니다. 다시 시도해 주세요.')
+        // 응답 상태 코드가 200-299 범위에 없을 때
+        console.error('전송 실패: 응답 상태 코드', response);
+        alert('서버에 문제가 생겨 공유가 되지 않았습니다. 다시 시도해 주세요.');
       }
     } catch (error) {
-      console.error(error);
-      // 추가적인 오류 처리 로직
+      console.error('전송 실패:', error);
+      alert('서버에 문제가 생겨 공유가 되지 않았습니다. 다시 시도해 주세요.');
     }
   };
 
