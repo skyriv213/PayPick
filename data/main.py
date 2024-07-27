@@ -271,8 +271,8 @@ session = Session()
 # 네이버 API 연결 및 호출
 
 # 네이버 API 키 설정
-client_id = 'w99GiZ4fDAhVrQ22tvm5'  # 애플리케이션 등록 시 발급받은 클라이언트 아이디 값
-client_secret = 'eO6SwWJZ5g'  # 애플리케이션 등록 시 발급받은 클라이언트 시크릿 값
+client_id = ''  # 애플리케이션 등록 시 발급받은 클라이언트 아이디 값
+client_secret = ''  # 애플리케이션 등록 시 발급받은 클라이언트 시크릿 값
 for brand in brands:
     print(brand)
     for dong in dong_list:
