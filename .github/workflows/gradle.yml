@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "ForCI" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "ForCI" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
-      working-directory: ${{ secrets.WORKINGDIRECTORY }}
+      working-directory: ${{ secrets.BEWORKINGDIRECTORY }}
 
 
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
@@ -49,10 +49,10 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
-      working-directory: ${{ secrets.WORKINGDIRECTORY }}
+      working-directory: ${{ secrets.BEWORKINGDIRECTORY }}
 
     - name: Verify .jar file existence
-      run: ls -la ./${{ secrets.WorkingDirectory }}/build/libs/
+      run: ls -la ./${{ secrets.BEWORKINGDIRECTORY }}/build/libs/
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.

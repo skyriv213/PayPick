@@ -39,9 +39,12 @@ services:
       - paypick-data:/var/lib/mysql
 
   backend:
-    build:
-      context: ./be
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./be
+    #   dockerfile: Dockerfile
+    container_name: paypick_spring
+    image : skyriv213/paypick
+    platform: linux/x86_64    # 추가된 라인
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/ana?useSSL=false&allowPublicKeyRetrieval=true
