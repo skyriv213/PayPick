@@ -19,6 +19,11 @@ public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
 
     @Override
+    public boolean existsByStoreId(Long storeId) {
+        return storeRepository.existsById(storeId);
+    }
+
+    @Override
     public List<StoreResponseListDto> getStoreInMap(PositionDto request) {
         double leftLatitude = request.getLeftPosition().getLat();
         double leftLongitude = request.getLeftPosition().getLng();
@@ -81,6 +86,11 @@ public class StoreServiceImpl implements StoreService {
     @Transactional
     public void deleteStore(Long storeId) {
         storeRepository.deleteById(storeId);
+    }
+
+    @Override
+    public boolean existsByStoreName(String storeName) {
+        return storeRepository.existsByStoreName(storeName);
     }
 
 //    @Override

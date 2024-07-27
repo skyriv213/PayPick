@@ -85,6 +85,7 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests((auth) ->
             auth
                 .requestMatchers("/store/**").permitAll()
+                .requestMatchers("/report/**").permitAll()
                 .anyRequest().authenticated());
 
         httpSecurity.exceptionHandling((exceptionHandling) ->
@@ -99,10 +100,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("https://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        configuration.setExposedHeaders(Arrays.asList("Location"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type","Access-Control-Allow-Origin"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

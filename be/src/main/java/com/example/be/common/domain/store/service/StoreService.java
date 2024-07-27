@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface StoreService {
 
+  boolean existsByStoreId(Long storeId);
+
   List<StoreResponseListDto> getStoreInMap(PositionDto request);
 
   StoreDto getStoreInfo(Long storeId);
@@ -23,6 +25,8 @@ public interface StoreService {
   void createStoreByDto(StoreCreateDto storeDto);
 
   void deleteStore(Long storeId);
+
+  boolean existsByStoreName(String storeName);
 
 //    List<Store> findAll();
 }

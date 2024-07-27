@@ -13,6 +13,7 @@ public interface StoreRepository extends JpaRepository<Store, Long>, StoreReposi
 //        double rightY);
 
   Store findByStoreName(String storeName);
+  boolean existsByStoreName(String storeName);
 
 
 }
