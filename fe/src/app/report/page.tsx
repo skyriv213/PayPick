@@ -11,8 +11,8 @@ const Report = () => {
   const [showInput, setShowInput] = useState(false);
   const [formData, setFormData] = useState({
     storeName: "",
-    errorMsg: "impossible",
-    otherError: ""
+    errorType: "impossible",
+    errorContent: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -21,9 +21,9 @@ const Report = () => {
       ...prevState,
       [name]: value
     }));
-    if (name === 'errorMsg' && value === 'other') {
+    if (name === 'errorType' && value === 'other') {
       setShowInput(true);
-    } else if (name === 'errorMsg') {
+    } else if (name === 'errorType') {
       setShowInput(false);
     }
   };
@@ -33,8 +33,8 @@ const Report = () => {
 
     const sendingData = {
       storeName: formData.storeName,
-      errorType: formData.errorMsg,
-      errorContent: showInput ? formData.otherError : ''
+      errorType: formData.errorType,
+      errorContent: showInput ? formData.errorContent : ''
     };
 
     if(formData.storeName === ''){
@@ -43,18 +43,13 @@ const Report = () => {
     }
     try {
       const response = await postApi('/report', sendingData);
+      console.log(response);
       
-  
-      if (response.ok) {
-        // 응답 상태 코드가 200-299 범위에 있을 때
+      if (response.statusCode === 200 ) {
+        router.push('/');
         console.log('전송 성공');
         alert('공유해주셔서 감사합니다! 문제를 확인하고 조치하도록 하겠습니다.');
-        router.push('/');
-      } else {
-        // 응답 상태 코드가 200-299 범위에 없을 때
-        console.error('전송 실패: 응답 상태 코드', response);
-        alert('서버에 문제가 생겨 공유가 되지 않았습니다. 다시 시도해 주세요.');
-      }
+      } 
     } catch (error) {
       console.error('전송 실패:', error);
       alert('서버에 문제가 생겨 공유가 되지 않았습니다. 다시 시도해 주세요.');
@@ -80,8 +75,8 @@ const Report = () => {
           <label>오류 내용</label>
           <select 
             className={styles.inputBox}
-            name="errorMsg"
-            value={formData.errorMsg}
+            name="errorType"
+            value={formData.errorType}
             onChange={handleChange}
           >
               <option value="impossible">애플페이 결제가 불가능한 곳이에요</option>
@@ -96,9 +91,9 @@ const Report = () => {
               <input 
                 className={styles.inputBox}
                 type="text"
-                name="otherError"
+                name="errorContent"
                 placeholder='오류 내용을 작성해주세요'
-                value={formData.otherError}
+                value={formData.errorContent}
                 onChange={handleChange}
               />
             </div>
