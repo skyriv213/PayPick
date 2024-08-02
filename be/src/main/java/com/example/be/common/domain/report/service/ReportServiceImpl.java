@@ -61,7 +61,7 @@ public class ReportServiceImpl implements ReportService {
   @Override
   public List<ReportStoreAdminDto> getReportStoreAll() {
     List<ReportStoreAdminDto> reportStoreAdminDtos = reportRepository.getReportStoreAll();
-    return List.of();
+    return reportStoreAdminDtos;
   }
 
   @Override
