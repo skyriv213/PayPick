@@ -86,6 +86,7 @@ public class SecurityConfig {
             auth
                 .requestMatchers("/store/**").permitAll()
                 .requestMatchers("/report/**").permitAll()
+                .requestMatchers("/admin/**").permitAll()
                 .anyRequest().authenticated());
 
         httpSecurity.exceptionHandling((exceptionHandling) ->
