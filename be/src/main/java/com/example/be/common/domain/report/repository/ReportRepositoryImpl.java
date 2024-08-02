@@ -27,13 +27,13 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
                     report.errorType,
                     report.errorContent,
                     store.id,
-                    store.storeName,
+                    report.storeName,
                     store.majorCategory,
                     store.middleCategory,
                     store.latitude,
                     store.longitude,
                     store.address)).from(report)
-            .innerJoin(store).on(report.store.id.eq(store.id))
+            .innerJoin(store).on(report.storeName.eq(store.storeName))
             .fetch();
 
         return getReportStoreAll;
