@@ -25,9 +25,6 @@ const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
             <Link href='/selectpay' onClick={closeAccordion}>결제 수단 선택</Link>
           </li>
           <li>
-            <Link href='/' onClick={closeAccordion}>결제 인증</Link>
-          </li>
-          <li>
             <Link href='/report' onClick={closeAccordion}>오류 정보 알리기</Link>
           </li>
         </ul>

@@ -12,26 +12,6 @@ interface sendDataProps {
   data?: Partial<reportData>;
 }
 
-const sendData = async ({method, reportId, data}: sendDataProps) => {
-  const url = `/admin/${reportId}`;
-  
-  const options: RequestInit = {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: data ? JSON.stringify(data) : undefined,
-  };
-
-  const response = await fetch(url, options);
-  
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-
-  return response.json();
-};
-
 const Page = () => {
 
   const [stores, setStores] = useState<reportData[]>([]);
@@ -51,7 +31,7 @@ const Page = () => {
         setStores(prevStores => prevStores.filter(store => store.reportId !== variables.reportId));
         // 삭제 요청 후 성공 시 해당 데이터를 stores에서 제거
       } else if (variables.method === 'PATCH' || variables.method === 'POST') {
-        queryClient.invalidateQueries({ queryKey: ['adminStores'] });
+        queryClient.invalidateQueries({ queryKey: ['/admin'] });
         // 수정 또는 새로 등록 후 성공 시 데이터를 새로 받아와서 stores를 업데이트
       }
     },
@@ -78,13 +58,15 @@ const Page = () => {
   
   if (isLoading) return <div className={styles.errorComponent}> Loading...</div>;
   if (isError) return <div className={styles.errorComponent}>Error loading data</div>;
+  console.log(stores);
+  
 
   return (
     <div className={styles.container}>
       {stores?.map((store, index) => {
         return(
           <div key={store.reportId} className={styles.box}>
-            {store.errorType === '기타' ? (
+            {store.errorType === 'other' ? (
                 <div className={styles.errorBox}>{store.errorContent}</div>
               ) : (
                 <div className={styles.errorBox}>{store.errorType}</div>
@@ -133,7 +115,7 @@ const Page = () => {
             />
             <div className={styles.buttonContainer}>
               <div className={styles.buttonBox}>
-                {!store.id || store.name === ""  ? (
+                {store.id ? (
                   null
                 ) : (
                   <button className={styles.dataButton} onClick={() => mutation.mutate({ method: 'DELETE', reportId: store.reportId })}>삭제</button>
@@ -156,3 +138,25 @@ const Page = () => {
 
 
 export default Page;
+
+
+const sendData = async ({method, reportId, data}: sendDataProps) => {
+  const url = `http://localhost:8080/admin/${reportId}`;
+  
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data ? JSON.stringify(data) : undefined,
+  };
+
+  const response = await fetch(url, options);
+  
+  if (!response.ok) {
+
+  console.error(response);
+  }
+
+  return response.json();
+};

@@ -14,7 +14,7 @@ import { getApi } from '@/hooks/api';
   const id = marker?.id
 
   async function getStore(id:number) {
-    const url = (`http://localhost:8080/store/${id}`)
+    const url = (`/store/${id}`)
     return getApi(url);
   }
 

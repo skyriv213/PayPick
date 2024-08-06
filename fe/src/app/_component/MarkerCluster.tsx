@@ -20,7 +20,7 @@ const MarkerCluster = () => {
 
 
   async function getMarkers(corner: string) {
-    const url = `http://localhost:8080/store?${corner}`;
+    const url = `/store?${corner}`;
     return getApi(url);
   }
 
@@ -38,10 +38,10 @@ const MarkerCluster = () => {
   }, [map, getCornerCoordinates]);
 
 
-  const MarkerClick = useCallback((store: Store) => {
+  const MarkerClick =(store: Store) => {
     setCurrentStore(store);
     storeModal(true);
-  }, [setCurrentStore, storeModal]);
+  };
 
   useEffect(() => {
     if (!stores || !map) return;
@@ -66,8 +66,8 @@ const MarkerCluster = () => {
       });
         
       const markerClustering = new MarkerClustering({
-        minClusterSize: 2,
-        maxZoom: 17,
+        minClusterSize: 5,
+        maxZoom: 16,
         map,
         markers,
         disableClickZoom: false,

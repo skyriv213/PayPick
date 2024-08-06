@@ -6,6 +6,8 @@ export const container = style({
   maxWidth: '540px',
   height: 'calc(100dvh - 60px)',
   backgroundColor: 'rgb(248, 249, 253)',
+  alignItems: 'center',
+  justifyContent: 'center',
  });
 
 export const info = style({
@@ -25,7 +27,6 @@ export const payWrapper = style({
  });
 
 globalStyle(`${payWrapper} li`, {
-  paddingBottom: '16px',
   fontSize: '20px',
   '@media': {
     '(max-width: 800px)': {
@@ -36,6 +37,7 @@ globalStyle(`${payWrapper} li`, {
 
 export const inputBox = style({
   marginTop: '8px',
+  marginBottom: '16px',
   padding: '8px',
   border: '0.5px solid lightGray',
   boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px',
@@ -56,7 +58,7 @@ export const inputBox = style({
 export const otherBox= style({
   display: 'flex',
   flexDirection: 'column',
-  marginTop: '16px',
+  // marginTop: '16px',
   marginBottom: '12px',
   backgroundColor: 'white',
   width: '100%',
@@ -65,20 +67,27 @@ export const otherBox= style({
   color: global.foreground.color,
  });
 
-export const confirmBox = style({
+ export const confirmBox = style({
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+ });
+
+export const confirm = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   border: 'none',
+  borderRadius: '50px',
   maxWidth: '540px',
-  width: '100%',
+  width: '50%',
   height: '10dvh',
   maxHeight: '120px',
   backgroundColor: global.foreground.color,
   color: 'white',
   fontSize: '25px',
   position: 'fixed',
-  bottom: '0px',
+  bottom: '5dvh',
  });
 
  

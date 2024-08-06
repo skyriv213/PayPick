@@ -82,25 +82,29 @@ const Report = () => {
               <option value="impossible">애플페이 결제가 불가능한 곳이에요</option>
               <option value="possible">애플페이 결제가 가능한 곳이에요</option>
               <option value="different">매장 이름이 실제와 달라요</option>
-              <option value="noThere">없는 매장이에요</option>
+              <option value="notThere">없는 매장이에요</option>
               <option value="other">기타</option>
           </select>
-          {showInput && (
-            <div className={styles.otherBox}>
-              <label>기타 오류 내용</label>
-              <input 
-                className={styles.inputBox}
-                type="text"
-                name="errorContent"
-                placeholder='오류 내용을 작성해주세요'
-                value={formData.errorContent}
-                onChange={handleChange}
-              />
-            </div>
-          )}
         </li>
+
+          {showInput && (
+              <div className={styles.otherBox}>
+                <label>기타 오류 내용</label>
+                <input 
+                  className={styles.inputBox}
+                  type="text"
+                  name="errorContent"
+                  placeholder='오류 내용을 작성해주세요'
+                  value={formData.errorContent}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
+
       </ul>
-      <button type='submit' className={styles.confirmBox} value='완료' onClick={handleSubmit}>완료</button>
+      <div className={styles.confirmBox}>
+        <button type='submit' className={styles.confirm} value='완료' onClick={handleSubmit}>완료</button>
+      </div>
     </div>
   )
 }

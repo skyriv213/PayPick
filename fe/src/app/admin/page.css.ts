@@ -6,6 +6,7 @@ export const container = style({
   flexDirection: 'column',
   backgroundColor: "white",
   width: '100%',
+  height: 'calc(100dvh - 60px)'
 })
 
 export const box = style({

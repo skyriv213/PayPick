@@ -4,6 +4,7 @@ import "./globalTheme.css";
 import * as styles from './layout.css'
 import RQProvider from "./_component/RQProvider";
 import Header from "./_component/Header";
+import FooterMenu from "./_component/FooterMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <div className={styles.wrapper}>
             <Header />
             {children}
+            <FooterMenu />
             <div id="modal"></div>
           </div>
         </RQProvider>
