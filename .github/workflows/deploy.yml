@@ -30,7 +30,7 @@ jobs:
 
     - name: Copy frontend files to EC2
       run: |
-        rsync -avz -e "ssh -v -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
+        rsync -avz -e "ssh -vvv -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
 
     - name: Install dependencies and restart application
       run: |
