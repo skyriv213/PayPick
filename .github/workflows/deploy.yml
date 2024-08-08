@@ -26,7 +26,7 @@ jobs:
         fi
 
     - name: Add SSH key to known hosts
-      run: ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo '${{ secrets.EC2_KEY }}' >> ~/.ssh/authorized_keys"
+      run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/authorized_keys
 
     - name: Copy frontend files to EC2
       run: |
