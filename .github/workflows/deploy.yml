@@ -3,7 +3,7 @@ name: Deploy Frontend to EC2
 on:
   push:
     branches:
-      - dev  # 또는 배포하고 싶은 다른 브랜치 이름
+      - dev
 
 jobs:
   deploy:
@@ -18,6 +18,8 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
 
     - name: Create known_hosts file if not exists
       run: |
@@ -30,7 +32,7 @@ jobs:
 
     - name: Copy frontend files to EC2
       run: |
-        rsync -avz -e "ssh -vvv -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
 
     - name: Install dependencies and restart application
       run: |
