@@ -42,6 +42,14 @@ dependencies {
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
+
+    // Log4j 2 의존성 추가
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    // Optional: Log4j 2 Core (필요한 경우)
+    implementation 'org.apache.logging.log4j:log4j-core'
+    implementation 'org.apache.logging.log4j:log4j-api'
+
     compileOnly 'org.projectlombok:lombok'
 //    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -51,6 +59,13 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
+}
+
+// Logback 의존성 제거
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 //jacoco 및 ascii docs
 test {
