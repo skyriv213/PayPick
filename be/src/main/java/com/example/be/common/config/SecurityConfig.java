@@ -57,6 +57,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -87,6 +88,8 @@ public class SecurityConfig {
                 .requestMatchers("/store/**").permitAll()
                 .requestMatchers("/report/**").permitAll()
                 .requestMatchers("/admin/**").permitAll()
+                .requestMatchers("/").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .anyRequest().authenticated());
 
         httpSecurity.exceptionHandling((exceptionHandling) ->
@@ -101,7 +104,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.addAllowedOrigin("*"); // 특정 도메인을 허용
+        configuration.addAllowedOriginPattern("*"); // 도메인 패턴(정규표현식) 허용
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type","Access-Control-Allow-Origin"));
