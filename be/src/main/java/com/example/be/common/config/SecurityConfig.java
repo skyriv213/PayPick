@@ -61,6 +61,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -83,13 +84,15 @@ public class SecurityConfig {
             headers.xssProtection(Customizer.withDefaults())
                 .contentSecurityPolicy(Customizer.withDefaults()));
 
+        httpSecurity.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(
+            SessionCreationPolicy.STATELESS));
+
         httpSecurity.authorizeHttpRequests((auth) ->
             auth
                 .requestMatchers("/store/**").permitAll()
                 .requestMatchers("/report/**").permitAll()
                 .requestMatchers("/admin/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/").permitAll()
-
                 .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .anyRequest().authenticated());
 
@@ -109,7 +112,8 @@ public class SecurityConfig {
         configuration.addAllowedOriginPattern("*"); // 도메인 패턴(정규표현식) 허용
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type","Access-Control-Allow-Origin"));
+//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type","Access-Control-Allow-Origin"));
+        configuration.addAllowedHeader("*");
         configuration.setExposedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
