@@ -1,6 +1,8 @@
+export const baseURL = `https://localhost:443`
+
 export async function getApi (url:string) {
   try {
-    const res = await fetch(`http://localhost:8080${url}`);
+    const res = await fetch(`${baseURL}${url}`);
 
     return await res.json()
   }catch (error) {
@@ -10,7 +12,7 @@ export async function getApi (url:string) {
 
 export async function postApi (url:string, newData:string | object) {
     try {
-      const res = await fetch(`http://localhost:8080${url}`, {
+      const res = await fetch(`${baseURL}${url}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +28,7 @@ export async function postApi (url:string, newData:string | object) {
 
 // export async function postApi(url: string, newData: string | object) {
 //   try {
-//     const res = await fetch(`http://localhost:8080${url}`, {
+//     const res = await fetch(`${baseURL}${url}`, {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -54,7 +56,7 @@ export async function postApi (url:string, newData:string | object) {
 
 export async function putApi (url:string, newData:string) {
   try {
-    const res = await fetch(`http://localhost:8080${url}`, {
+    const res = await fetch(`${baseURL}${url}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +72,7 @@ export async function putApi (url:string, newData:string) {
 
 export async function deleteApi(url: string) {
   try {
-    const res = await fetch(`http://localhost:8080${url}`, { method: 'DELETE' });
+    const res = await fetch(`${baseURL}${url}`, { method: 'DELETE' });
 
     return await res.json();
   } catch (error) {

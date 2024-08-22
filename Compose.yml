@@ -7,9 +7,11 @@ volumes:
 
 services:
   frontend:
-    build:
-      context: ./fe
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./fe
+    #   dockerfile: Dockerfile
+    container_name: paypick_nextjs
+    image : benidene/paypick-nextjs-app
     ports:
       - "3000:3000"
 
