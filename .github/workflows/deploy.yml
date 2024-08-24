@@ -41,7 +41,8 @@ jobs:
 
     - name: Build frontend Docker image
       run: |
-        docker build -t benidene/paypick-nextjs-app -f ./fe/Dockerfile .
+        docker build -t benidene/paypick-nextjs-app -f ./fe/Dockerfile ./fe
+
 
     - name: Push Docker image to DockerHub
       run: |
