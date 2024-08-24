@@ -30,35 +30,28 @@ jobs:
     - name: Add EC2 to known_hosts
       run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-    - name: Copy frontend files to EC2
-      run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
-    - name: Stop PM2 processes
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build frontend Docker image
+      run: |
+        docker build -t benidene/paypick-nextjs-app -f ./Dockerfile .
+
+    - name: Push Docker image to DockerHub
+      run: |
+        docker push benidene/paypick-nextjs-app
+
+    - name: Deploy to EC2 via SSH
       run: |
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /home/ubuntu/paypick
-          pm2 kill
-        EOF
-    
-    - name: Install dependencies
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /home/ubuntu/paypick
-          rm -rf node_modules
-          npm install
-        EOF
-    
-    - name: Build project
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /home/ubuntu/paypick
-          npm run build
-        EOF
-    
-    - name: Start application with PM2
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /home/ubuntu/paypick
-          pm2 start npm --name "next-app" -- start
+          docker pull benidene/paypick-nextjs-app
+          docker stop next-app || true
+          docker rm next-app || true
+          docker run -d -p 80:3000 --name next-app benidene/paypick-nextjs-app
         EOF
