@@ -34,11 +34,31 @@ jobs:
       run: |
         rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./fe/ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/paypick
 
-    - name: Install dependencies and restart application
+    - name: Stop PM2 processes
       run: |
         ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
           cd /home/ubuntu/paypick
+          pm2 kill
+        EOF
+    
+    - name: Install dependencies
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /home/ubuntu/paypick
+          rm -rf node_modules
           npm install
+        EOF
+    
+    - name: Build project
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /home/ubuntu/paypick
           npm run build
-          pm2 restart next-app || pm2 start npm --name "next-app" -- start
+        EOF
+    
+    - name: Start application with PM2
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /home/ubuntu/paypick
+          pm2 start npm --name "next-app" -- start
         EOF
