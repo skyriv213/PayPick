@@ -109,9 +109,9 @@ const Page = () => {
             <input
               className={styles.inputBox}
               type="text"
-              value={store.paywayList}
+              value={store.paymentList}
               placeholder="페이"
-              onChange={(e) => handleInputChange(index, 'paywayList', e.target.value.split(','))}
+              onChange={(e) => handleInputChange(index, 'paymentList', e.target.value.split(','))}
             />
             <div className={styles.buttonContainer}>
               <div className={styles.buttonBox}>
