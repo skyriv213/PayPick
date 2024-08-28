@@ -34,7 +34,7 @@ const MapSection = () => {
 
     useEffect(() => {
         getGeoLocation();
-      }, []);
+      }, [getGeoLocation]);
     
     return (
         <>

@@ -61,20 +61,20 @@ const Report = () => {
       <div className={styles.info}>문제가 있는 부분을 저희에게 공유해주세요 : )</div>
       <ul className={styles.payWrapper}>
         <li>
-          <label>매장명</label>
-          <input 
-            className={styles.inputBox}
-            type="text"
-            name="storeName"
-            placeholder='정확한 매장명을 입력해주세요!'
-            value={formData.storeName}
-            onChange={handleChange}
-          />
+            <label>매장명</label>
+            <input 
+              className={styles.input}
+              type="text"
+              name="storeName"
+              placeholder='정확한 매장명을 입력해주세요!'
+              value={formData.storeName}
+              onChange={handleChange}
+            />
         </li>
         <li>
           <label>오류 내용</label>
           <select 
-            className={styles.inputBox}
+            className={styles.input}
             name="errorType"
             value={formData.errorType}
             onChange={handleChange}
@@ -86,12 +86,11 @@ const Report = () => {
               <option value="other">기타</option>
           </select>
         </li>
-
           {showInput && (
               <div className={styles.otherBox}>
                 <label>기타 오류 내용</label>
                 <input 
-                  className={styles.inputBox}
+                  className={styles.input}
                   type="text"
                   name="errorContent"
                   placeholder='오류 내용을 작성해주세요'
@@ -100,11 +99,13 @@ const Report = () => {
                 />
               </div>
             )}
-
+            <button
+              type='submit' 
+              className={styles.confirmButton} 
+              value='완료' 
+              onClick={handleSubmit}
+            >완료</button>
       </ul>
-      <div className={styles.confirmBox}>
-        <button type='submit' className={styles.confirm} value='완료' onClick={handleSubmit}>완료</button>
-      </div>
     </div>
   )
 }

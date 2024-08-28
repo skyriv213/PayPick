@@ -10,11 +10,15 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <Link href={'/'} className={styles.logo}>Paypick</Link>
-      <div className={styles.menu} onClick={() => setIsOpen(!isOpen)}>=</div>
-      <AccordionMenu isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <Link href={'/'} className={styles.logo}>
+        <span className={styles.logoText}>Paypick</span>
+      </Link>
+      <div className={styles.menu} onClick={() => setIsOpen(!isOpen)}>
+        <span>=</span>
+        <AccordionMenu isOpen={isOpen} setIsOpen={setIsOpen}/>
+      </div> 
     </div>
   )
 }
 
-export default Header
+export default Header;

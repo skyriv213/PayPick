@@ -1,22 +1,26 @@
-import {globalStyle, style} from "@vanilla-extract/css";
+import { globalStyle, style, styleVariants} from "@vanilla-extract/css";
 import {global} from "@/app/globalTheme.css";
 
 export const container = style({
   width: '100dvw',
   maxWidth: '540px',
-  height: 'calc(100dvh - 60px)',
+  height: 'calc(100dvh - 50px)',
   backgroundColor: 'rgb(248, 249, 253)',
+  alignItems: 'center',
+  justifyContent: 'center',
  });
 
 export const info = style({
   display: 'flex',
-  marginTop: '16px',
-  padding: '16px 20px',
+  padding: '84px 20px 16px 20px',
   fontSize: '18px',
   fontWeight: '800',
  });
 
 export const payWrapper = style({
+  display:"flex",
+  flexDirection: 'column',
+  alignItems: 'center',
   margin: '20px 16px',
   padding: '20px 16px',
   boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px',
@@ -25,8 +29,8 @@ export const payWrapper = style({
  });
 
 globalStyle(`${payWrapper} li`, {
-  paddingBottom: '16px',
   fontSize: '20px',
+  width: '100%',
   '@media': {
     '(max-width: 800px)': {
       fontSize: '16px'
@@ -34,15 +38,16 @@ globalStyle(`${payWrapper} li`, {
   }
  })
 
-export const inputBox = style({
+export const input = style({
   marginTop: '8px',
+  marginBottom: '20px',
   padding: '8px',
   border: '0.5px solid lightGray',
   boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px',
   borderRadius: '8px',
   backgroundColor: 'white',
   width: '100%',
-  height: '35px',
+  height: '36px',
   fontSize: '14px',
   color: global.foreground.color,
   selectors: {
@@ -56,27 +61,47 @@ export const inputBox = style({
 export const otherBox= style({
   display: 'flex',
   flexDirection: 'column',
-  marginTop: '16px',
-  marginBottom: '12px',
+  marginBottom: '48px',
   backgroundColor: 'white',
   width: '100%',
-  height: '35px',
+  height: '36px',
   fontSize: '16px',
   color: global.foreground.color,
  });
 
-export const confirmBox = style({
+ export const confirmBox = style({
+  width: '540px',
+  alignItems: 'center',
+  justifyContent: 'center',
+ });
+
+export const confirmButton = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: 'none',
+  borderRadius: '100px',
   maxWidth: '540px',
   width: '100%',
-  height: '10dvh',
+  height: '8dvh',
   maxHeight: '120px',
+  fontSize: '20px',
   backgroundColor: global.foreground.color,
-  color: 'white',
-  fontSize: '25px',
-  position: 'fixed',
-  bottom: '0px',
+  color: '#fff',
+  '@media': {
+    '(max-width: 540px)': {
+      fontSize: '16px'
+    }
+  }
  });
+
+ export const confirmButtonVariants = styleVariants({
+  enabled: {
+    backgroundColor: global.foreground.color,
+    color: '#fff',
+  },
+  disabled: {
+    backgroundColor: '#ccc',
+    color: '#666',
+    cursor: 'not-allowed',
+  },
+});

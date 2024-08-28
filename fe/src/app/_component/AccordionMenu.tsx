@@ -21,9 +21,9 @@ const AccordionMenu = ({ isOpen, setIsOpen }:Props) => {
           <li>
             <Link href='/' onClick={closeAccordion}>홈</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href='/selectpay' onClick={closeAccordion}>결제 수단 선택</Link>
-          </li>
+          </li> */}
           <li>
             <Link href='/report' onClick={closeAccordion}>오류 정보 알리기</Link>
           </li>

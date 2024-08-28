@@ -24,7 +24,7 @@ const RerenderButton = ({ refetchMarkers }: Props) => {
   };
   
   return (
-    <Modal open={rerenderShow} className={styles.secondContainer}>
+    <Modal open={rerenderShow} className={styles.container}>
       <button onClick={onClick} className={styles.displayModal} >
         <span>현 지도에서 검색</span>
       </button>
@@ -32,4 +32,4 @@ const RerenderButton = ({ refetchMarkers }: Props) => {
   )
 }
 
-export default RerenderButton
+export default RerenderButton;

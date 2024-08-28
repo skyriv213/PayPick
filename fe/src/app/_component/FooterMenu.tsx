@@ -5,16 +5,19 @@ const FooterMenu = () => {
   return (
     <ul className={styles.container}>
       <li className={styles.menu}>
-        <Link href='/'>최근 본 상점</Link>
+        <Link href='/'></Link>
+        <span>최근 본 상점</span>
+      </li>
+      <li className={styles.borderMenu}>
+        <Link href='/'></Link>
+        <span>홈</span>
       </li>
       <li className={styles.menu}>
-        <Link href='/'>홈</Link>
-      </li>
-      <li className={styles.menu}>
-       <Link href='/report'>문의</Link>
+       <Link href='/report'></Link>
+       <span>문의</span>
       </li>
     </ul>
   )
 }
 
-export default FooterMenu
+export default FooterMenu;

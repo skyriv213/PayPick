@@ -29,7 +29,7 @@ import { getApi } from '@/hooks/api';
     return null;
   }
   
-  const { name, middleCategory, address, paywayList } = storeData
+  const { name, middleCategory, address, paymentList } = storeData
   
     return (
       <Modal open={show} className={styles.container}>
@@ -43,7 +43,7 @@ import { getApi } from '@/hooks/api';
             <div>{address}</div>
           </div>
           <div className={styles.payInfo}>
-            <div>{paywayList}애플페이</div>
+            <div>{paymentList}애플페이</div>
             <a href={`/report/${id}?name=${encodeURIComponent(name)}`}>정보 수정 요청</a>
           </div>
         </div>
@@ -51,4 +51,4 @@ import { getApi } from '@/hooks/api';
     )
   }
 
-export default StoreDetail
+export default StoreDetail;

@@ -21,14 +21,21 @@ const Page = () => {
   
   useEffect(() => {
     const name = searchParams.get('name');
-      if (typeof name === 'string') {
-        setFormData(prevState => ({
-          ...prevState,
-          storeName: name
-        }));
-        console.log(name);
-      }
-    }, [searchParams]);
+
+    // if (!name) { // url 조작으로 report/[id] 페이지 접근시 일반 report 페이지로 리디렉션
+    //   alert('잘못된 접근입니다!');
+    //   router.push('/report');
+    //   return;
+    // }
+
+    if (typeof name === 'string') {
+      setFormData(prevState => ({
+        ...prevState,
+        storeName: name
+      }));
+      console.log(name);
+    }
+    }, [id, searchParams, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -72,55 +79,58 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.info}>문제가 있는 부분을 저희에게 공유해주세요 : </div>
-      <ul className={styles.payWrapper}>
-        <label>매장명</label>
-        <li>
+return (
+  <div className={styles.container}>
+    <div className={styles.info}>문제가 있는 부분을 저희에게 공유해주세요 : )</div>
+    <ul className={styles.payWrapper}>
+      <li>
+          <label>매장명</label>
           <input 
-            className={styles.inputBox}
+            className={styles.input}
             type="text"
             name="storeName"
+            placeholder='정확한 매장명을 입력해주세요!'
             value={formData.storeName}
-            onChange={handleChange} 
-            readOnly
-          />
-        </li>
-        <label>오류 내용</label>
-        <li>
-          <select 
-            className={styles.inputBox}
-            name="errorType"
-            value={formData.errorType}
             onChange={handleChange}
-          >
+          />
+      </li>
+      <li>
+        <label>오류 내용</label>
+        <select 
+          className={styles.input}
+          name="errorType"
+          value={formData.errorType}
+          onChange={handleChange}
+        >
             <option value="impossible">애플페이 결제가 불가능한 곳이에요</option>
             <option value="possible">애플페이 결제가 가능한 곳이에요</option>
             <option value="different">매장 이름이 실제와 달라요</option>
             <option value="notThere">없는 매장이에요</option>
             <option value="other">기타</option>
-          </select>
-        </li>
-          {showInput && (
-              <div className={styles.otherBox}>
-                <label>기타 오류 내용</label>
-                <input 
-                  className={styles.inputBox}
-                  type="text"
-                  name="errorContent"
-                  placeholder='오류 내용을 작성해주세요'
-                  value={formData.errorContent}
-                  onChange={handleChange} 
-                />
-              </div>
-            )}
-      </ul>
-      <button type='submit' className={styles.confirmBox} value='완료' onClick={handleSubmit}>
-        완료
-      </button>
-    </div>
-  )
+        </select>
+      </li>
+        {showInput && (
+            <div className={styles.otherBox}>
+              <label>기타 오류 내용</label>
+              <input 
+                className={styles.input}
+                type="text"
+                name="errorContent"
+                placeholder='오류 내용을 작성해주세요'
+                value={formData.errorContent}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+          <button
+            type='submit' 
+            className={styles.confirmButton} 
+            value='완료' 
+            onClick={handleSubmit}
+          >완료</button>
+    </ul>
+  </div>
+)
 }
 
 export default Page;

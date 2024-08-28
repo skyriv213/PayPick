@@ -13,6 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up environment variables
+      run: |
+        echo "NEXT_PUBLIC_NAVER_MAP_ID=${{ secrets.NEXT_PUBLIC_NAVER_MAP_ID }}" >> .env
+
     - name: Install SSH key
       run: |
         mkdir -p ~/.ssh

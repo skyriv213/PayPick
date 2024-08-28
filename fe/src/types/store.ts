@@ -8,7 +8,7 @@ export interface storeData extends Store {
   name: string;
   middleCategory: string;
   address: string;
-  paywayList: string | string[];
+  paymentList: string | string[];
 }
 
 export interface reportData {
@@ -18,7 +18,7 @@ export interface reportData {
   name?: string;
   middleCategory?: string;
   address?: string;
-  paywayList?: string | string[];
+  paymentList?: string | string[];
   reportId: number;
   errorType: string;
   errorContent?: string
