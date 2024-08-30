@@ -55,11 +55,17 @@ jobs:
       run: |
         docker push benidene/paypick-nextjs-app
 
-    - name: Deploy to EC2 via SSH
+    - name: Deploy to EC2 via SSH and Docker
       run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          docker pull benidene/paypick-nextjs-app
-          docker stop next-app || true
-          docker rm next-app || true
-          docker run -d -p 80:3000 --name next-app benidene/paypick-nextjs-app
-        EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            # 기존 Docker 컨테이너 중지 및 삭제 (존재하는 경우에만)
+            docker stop next-app || true
+            docker rm next-app || true
+            
+           # 최신 Docker 이미지로 새로운 컨테이너 실행
+            docker pull benidene/paypick-nextjs-app
+            docker run -d -p 80:3000 --name next-app benidene/paypick-nextjs-app
+            
+          # HTTPS용 포트도 추가로 노출시키려면 다음과 같이 수정:
+            docker run -d -p 80:3000 -p 443:3001 --name next-app benidene/paypick-nextjs-app
+          EOF
