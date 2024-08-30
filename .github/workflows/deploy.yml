@@ -58,11 +58,18 @@ jobs:
     - name: Deploy to EC2 via SSH and Docker
       run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            # 기존 Docker 컨테이너 중지 및 삭제 (존재하는 경우에만)
-            docker stop next-app || true
-            docker rm next-app || true
-            
-           # 최신 Docker 이미지로 새로운 컨테이너 실행
+            # 모든 Docker 컨테이너 강제 중지 및 삭제
+            echo "Stopping and removing all Docker containers"
+            docker rm -f $(docker ps -qa)
+
+            # 최신 Docker 이미지로 새로운 컨테이너 실행
+            echo "Pulling the latest Docker image"
             docker pull benidene/paypick-nextjs-app
-            docker run -d -p 80:3000 -p 443:3001 --name next-app benidene/paypick-nextjs-app
+
+            echo "Running the new Docker container"
+            docker run -d -p 80:3000 --name next-app benidene/paypick-nextjs-app
+
+            # 사용하지 않는 Docker 이미지 정리
+            echo "Pruning unused Docker images"
+            docker image prune -f
           EOF
