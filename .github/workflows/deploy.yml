@@ -46,14 +46,17 @@ jobs:
         username: ${{ secrets.FE_DOCKER_USERNAME }}
         password: ${{ secrets.FE_DOCKER_PASSWORD }}
 
-    - name: Build frontend Docker image
-      run: |
-        docker build -t benidene/paypick-nextjs-app -f ./fe/Dockerfile ./fe
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ${{ secrets.FE_WORKING_DIRECTORY }}
+        push: true
+        tags: ${{ secrets.FE_DOCKER_REPOSITORY_USERNAME }}/paypick:${{ github.sha }}, ${{ secrets.FE_DOCKER_REPOSITORY_USERNAME }}/paypick-nextjs-app:latest
 
 
-    - name: Push Docker image to DockerHub
-      run: |
-        docker push benidene/paypick-nextjs-app
+    #- name: Push Docker image to DockerHub
+      #run: |
+        #docker push benidene/paypick-nextjs-app
 
     - name: Deploy to EC2 via SSH and Docker
       run: |
@@ -64,10 +67,10 @@ jobs:
 
             # 최신 Docker 이미지로 새로운 컨테이너 실행
             echo "Pulling the latest Docker image"
-            docker pull benidene/paypick-nextjs-app
+            docker pull ${{ secrets.FE_DOCKER_REPOSITORY_USERNAME }}/paypick-nextjs-app:latest
 
             echo "Running the new Docker container"
-            docker run -d -p 80:3000 --name next-app benidene/paypick-nextjs-app
+            docker run -d -p 80:3000 --name next-app ${{ secrets.FE_DOCKER_REPOSITORY_USERNAME }}/paypick-nextjs-app:latest
 
             # 사용하지 않는 Docker 이미지 정리
             echo "Pruning unused Docker images"
