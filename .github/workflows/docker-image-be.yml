@@ -58,6 +58,7 @@ jobs:
       with:
         context: ${{ secrets.BeWORKINGDIRECTORY }}
         push: true
+        platforms: linux/arm64/v8,linux/amd64
         tags: ${{ secrets.DOCKER_REPOSITORY_USERNAME }}/paypick:${{ github.sha }}, ${{ secrets.DOCKER_REPOSITORY_USERNAME }}/paypick:latest
         
 
