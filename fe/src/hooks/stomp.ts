@@ -1,5 +1,5 @@
 import { Client, IMessage } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
+
 
 let stompClient: Client | null = null;
 
@@ -7,7 +7,7 @@ export const connectToChat = (roomId: string, onMessageReceived: (message: IMess
   const socketUrl = 'wss://localhost/chat'; // 백엔드 WebSocket 엔드포인트
 
   stompClient = new Client({
-    webSocketFactory: () => new SockJS(socketUrl),
+    brokerURL: `${socketUrl}/${roomId}`,
     debug: (str: string) => {
       console.log(str);
     },

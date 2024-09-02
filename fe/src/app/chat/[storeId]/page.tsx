@@ -61,7 +61,7 @@ const ChatRoom: React.FC = () => {
     <div>
       <h1>Chat Room for Store: {storeId}</h1>
       <div id="messageArea" style={{ height: '300px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px' }}>
-        {messages.map((msg, index) => (
+        {Array.isArray(messages) && messages.map((msg, index) => (
           <div key={index}>
             <strong>{msg.time}: </strong>
             <span>{msg.text}</span>
@@ -73,7 +73,7 @@ const ChatRoom: React.FC = () => {
         value={messageInput}
         onChange={(e) => setMessageInput(e.target.value)}
         placeholder="Enter your message"
-        style={{ width: '80%', padding: '10px' }}
+        style={{ width: '80%', padding: '100px' }}
       />
       <button onClick={handleSendMessage} style={{ padding: '10px' }}>
         Send

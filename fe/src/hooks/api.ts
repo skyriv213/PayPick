@@ -1,4 +1,4 @@
-export const baseURL = `https://localhost:443`
+export const baseURL = `https://localhost`
 
 export async function getApi (url:string) {
   try {
