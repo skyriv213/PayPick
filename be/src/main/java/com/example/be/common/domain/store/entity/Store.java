@@ -1,5 +1,6 @@
 package com.example.be.common.domain.store.entity;
 
+import com.example.be.common.domain.chat.entity.ChatRoom;
 import com.example.be.common.domain.payway.entity.Payment;
 import com.example.be.common.domain.report.entity.Report;
 import com.example.be.common.domain.store.dtos.StoreUpdateDto;
@@ -65,6 +66,9 @@ public class Store {
     @Builder.Default
     @JsonIgnore
     private List<Report> reports = new ArrayList<>();
+
+    @OneToOne(mappedBy = "store")
+    private ChatRoom chatRoom;
 
     public void updateByDto(StoreUpdateDto storeDto) {
         this.address = storeDto.getAddress();

@@ -28,5 +28,7 @@ public interface StoreService {
 
   boolean existsByStoreName(String storeName);
 
+  Store findById(Long storeId);
+
 //    List<Store> findAll();
 }

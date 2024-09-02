@@ -93,6 +93,13 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.existsByStoreName(storeName);
     }
 
+    @Override
+    public Store findById(Long storeId) {
+        Store store = storeRepository.findById(storeId)
+            .orElseThrow(() -> new IllegalArgumentException("해당 매장은 존재하지않습니다."));
+        return store;
+    }
+
 //    @Override
 //    public List<Store> findAll() {
 //        return storeRepository.findAll();
