@@ -12,12 +12,14 @@ services:
     #   dockerfile: Dockerfile
     container_name: paypick_nextjs
     image : benidene/paypick-nextjs-app
+    platform: linux/amd64  # 추가된 라인
     ports:
       - "3000:3000"
 
   nginx:
     image: nginx:latest
     container_name: nginx
+    platform: linux/amd64  # 추가된 라인
     ports:
       - "80:80"      # HTTP 포트
       - "443:443"    # HTTPS 포트
@@ -30,7 +32,7 @@ services:
 
   database:
     image: mysql:8.0
-
+    platform: linux/amd64  # 추가된 라인
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1234
@@ -46,7 +48,7 @@ services:
     #   dockerfile: Dockerfile
     container_name: paypick_spring
     image : skyriv213/paypick
-    platform: linux/x86_64    # 추가된 라인
+    platform: linux/amd64  # 수정된 라인
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/ana?useSSL=false&allowPublicKeyRetrieval=true
@@ -65,6 +67,3 @@ services:
       - paypick-logs:/app/logs  # 로그 파일 저장을 위한 볼륨 마운트 추가
     depends_on:
       - database
-
-
-

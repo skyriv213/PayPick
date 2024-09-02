@@ -5,6 +5,7 @@ import Modal from './Modal';
 import { Store, storeData } from '@/types/store';
 import { CURRENT_STORE_KEY } from '@/hooks/useStore';
 import { getApi } from '@/hooks/api';
+import Link from 'next/link';
 
  const StoreDetail = () => {
 
@@ -29,13 +30,14 @@ import { getApi } from '@/hooks/api';
     return null;
   }
   
-  const { name, middleCategory, address, paymentList } = storeData
+  const { name, middleCategory, address, paymentList } = storeData // paymentList 오류로 일단 제외
   
     return (
       <Modal open={show} className={styles.container}>
         <div className={styles.displayModal}>
           <div className={styles.payInfo}>
             <div>{name}</div>
+            <Link href={`/chat/${id}`}>chat</Link>
             <button className={styles.buttonCss} onClick={() => storeModal(false)}>X</button>
           </div>
           <div className={styles.info}>
@@ -43,7 +45,11 @@ import { getApi } from '@/hooks/api';
             <div>{address}</div>
           </div>
           <div className={styles.payInfo}>
-            <div>{paymentList}애플페이</div>
+          {paymentList.map((payment) => (
+            <div key={payment.id}>
+              {payment.payType}
+            </div>
+          ))}
             <a href={`/report/${id}?name=${encodeURIComponent(name)}`}>정보 수정 요청</a>
           </div>
         </div>

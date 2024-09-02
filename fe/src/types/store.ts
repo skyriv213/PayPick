@@ -1,3 +1,8 @@
+export interface Payment {
+  id: number;
+  payType: string;
+}
+
 export interface Store {
   id: number;
   lat: number;
@@ -8,7 +13,7 @@ export interface storeData extends Store {
   name: string;
   middleCategory: string;
   address: string;
-  paymentList: string | string[];
+  paymentList: Payment[];
 }
 
 export interface reportData {
