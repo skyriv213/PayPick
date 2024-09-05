@@ -4,6 +4,7 @@ import com.example.be.common.domain.chat.entity.Chat;
 import com.example.be.common.domain.chat.entity.ChatRoom;
 import com.example.be.common.domain.chat.repository.ChatRepository;
 import com.example.be.common.domain.chat.repository.ChatRoomRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,11 @@ public class ChatServiceImpl implements ChatService {
 
 
     @Override
-    public ChatDto sendMessage(Long roomId, ChatDto chatMessage) {
-        ChatRoom chatRoom = chatRoomRepository.findById(roomId)
-            .orElseThrow(() -> new IllegalArgumentException("해당 채팅방은 존재하지않습니다"));
-        Chat chat = Chat.createChat(chatMessage, chatRoom);
+    public ChatDto sendMessage(Long storeId, ChatDto chatMessage) {
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findByStoreId(storeId);
+//            .orElseThrow(() -> new IllegalArgumentException("해당 채팅방은 존재하지않습니다"));
+
+        Chat chat = Chat.createChat(chatMessage, chatRoom.orElse(null));
         chatRepository.save(chat);
         return chatMessage;
     }

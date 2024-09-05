@@ -11,9 +11,9 @@ export const connectToChat = (roomId: string, onMessageReceived: (message: IMess
     debug: (str: string) => {
       console.log(str);
     },
-    reconnectDelay: 5000, // 재연결 시도 간격
-    heartbeatIncoming: 4000,
-    heartbeatOutgoing: 4000,
+    reconnectDelay: 50000, // 재연결 시도 간격
+    heartbeatIncoming: 40000,
+    heartbeatOutgoing: 40000,
   });
 
   stompClient.onConnect = () => {

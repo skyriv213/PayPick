@@ -17,10 +17,10 @@ public class ChatController {
 
 
     @CrossOrigin
-    @MessageMapping("/rooms/{roomId}")
-    @SendTo("/topic/rooms/{roomId}")
-    public ChatDto sendMessage(@DestinationVariable Long roomId, @Payload ChatDto chatMessage) {
+    @MessageMapping("/rooms/{storeId}")
+    @SendTo("/topic/rooms/{storeId}")
+    public ChatDto sendMessage(@DestinationVariable Long storeId, @Payload ChatDto chatMessage) {
 
-        return chatService.sendMessage(roomId, chatMessage);
+        return chatService.sendMessage(storeId, chatMessage);
     }
 }

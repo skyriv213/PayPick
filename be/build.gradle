@@ -43,12 +43,12 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
 
-    // Log4j 2 의존성 추가
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-
-    // Optional: Log4j 2 Core (필요한 경우)
-    implementation 'org.apache.logging.log4j:log4j-core'
-    implementation 'org.apache.logging.log4j:log4j-api'
+//    // Log4j 2 의존성 추가
+//    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//
+//    // Optional: Log4j 2 Core (필요한 경우)
+//    implementation 'org.apache.logging.log4j:log4j-core'
+//    implementation 'org.apache.logging.log4j:log4j-api'
 
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
@@ -64,11 +64,11 @@ dependencies {
 }
 
 // Logback 의존성 제거
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-}
+//configurations {
+//    all {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//    }
+//}
 //jacoco 및 ascii docs
 test {
 //    jacoco{

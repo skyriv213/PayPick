@@ -8,8 +8,8 @@ import com.example.be.common.domain.chat.repository.ChatRepository;
 import com.example.be.common.domain.chat.repository.ChatRoomRepository;
 import com.example.be.common.domain.store.entity.Store;
 import com.example.be.common.domain.store.service.StoreService;
-import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,8 +34,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
   @Override
   public List<ChatDto> getChatRoom(Long storeId) {
-    ChatRoom chatRoomByStoreId = chatRoomRepository.findChatRoomByStoreId(storeId);
-    List<Chat> chats = chatRoomByStoreId.getChats();
+    Optional<ChatRoom> chatRoomByStoreId = chatRoomRepository.findByStoreId(storeId);
+    List<Chat> chats = chatRoomByStoreId.get().getChats();
     return chats.stream().map(ChatDto::new).collect(Collectors.toList());
   }
 
