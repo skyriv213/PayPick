@@ -23,14 +23,14 @@ import Link from 'next/link';
     queryKey: [`/store`, id],
     queryFn: () => id ? getStore(id) : Promise.resolve(undefined),
     enabled: !!id, // id가 정의된 경우에만 쿼리 실행
-    staleTime: 60 * 1000, // 1분
+    staleTime: 60 * 1000,
   });
 
   if (!storeData) {
     return null;
   }
   
-  const { name, middleCategory, address, paymentList } = storeData // paymentList 오류로 일단 제외
+  const { name, middleCategory, address, paymentList } = storeData
   
     return (
       <Modal open={show} className={styles.container}>
@@ -40,16 +40,17 @@ import Link from 'next/link';
             <Link href={`/chat/${id}`}>chat</Link>
             <button className={styles.buttonCss} onClick={() => storeModal(false)}>X</button>
           </div>
-          <div className={styles.info}>
-            <div>{middleCategory}</div>
-            <div>{address}</div>
+          <div >
+            <div className={styles.info}>{middleCategory}</div>
+            <div className={styles.info}>{address}</div>
           </div>
           <div className={styles.payInfo}>
-          {paymentList.map((payment) => (
+            <span>애플페이</span>
+          {/* {paymentList.map((payment) => (
             <div key={payment.id}>
               {payment.payType}
             </div>
-          ))}
+          ))} */}
             <a href={`/report/${id}?name=${encodeURIComponent(name)}`}>정보 수정 요청</a>
           </div>
         </div>

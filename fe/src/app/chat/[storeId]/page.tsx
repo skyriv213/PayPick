@@ -5,6 +5,8 @@ import { useRouter, useParams } from 'next/navigation';
 import { checkChatRoom, createChatRoom, enterChatRoom } from '@/hooks/chatApi';
 import { connectToChat, disconnectFromChat, sendMessage } from '@/hooks/stomp';
 import { IMessage } from '@stomp/stompjs';
+import * as styles from './page.css'
+
 
 const ChatRoom: React.FC = () => {
   const router = useRouter()
@@ -19,7 +21,7 @@ const ChatRoom: React.FC = () => {
   const [messageInput, setMessageInput] = useState<string>('');
 
   useEffect(() => {
-    if (!isString(storeId)) {      // 테스트를 위해 일단 주석처리
+    if (!isString(storeId)) {
       router.push('/')
       return;
     }
@@ -38,7 +40,14 @@ const ChatRoom: React.FC = () => {
       // WebSocket 연결 설정
       const onMessageReceived = (message: IMessage) => {
         const chatMessage = JSON.parse(message.body);
-        setMessages((prevMessages) => [...prevMessages, chatMessage]);
+        
+        setMessages((prevMessages) => {
+          if (!Array.isArray(prevMessages)) {
+            console.error('prevMessages is not an array:', prevMessages); // 디버깅 로그 추가
+            return [chatMessage]; // 기존 메세지 데이터가 없어서 배열이 아닌 undefined 경우 새 배열로 시작
+          }
+          return [...prevMessages, chatMessage]; // 배열일 경우 기존 메시지에 새 메시지 추가
+        });
       };
 
       connectToChat(storeId, onMessageReceived); // STOMP 연결 설정
@@ -58,7 +67,7 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Chat Room for Store: {storeId}</h1>
       <div id="messageArea" style={{ height: '300px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px' }}>
         {Array.isArray(messages) && messages.map((msg, index) => (

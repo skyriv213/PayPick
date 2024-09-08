@@ -5,12 +5,33 @@ import { useState, useEffect } from 'react';
 import { reportData } from '@/types/store';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { getApi } from '@/hooks/api';
+import { baseURL } from '@/hooks/api';
 
 interface sendDataProps {
   method: string;
   reportId: number;
   data?: Partial<reportData>;
 }
+
+const sendData = async ({method, reportId, data}: sendDataProps) => {
+  const url = `${baseURL}/admin/${reportId}`;
+  
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data ? JSON.stringify(data) : undefined,
+  };
+
+  const response = await fetch(url, options);
+  
+  if (!response.ok) {
+  console.error(response);
+  }
+
+  return response.json();
+};
 
 const Page = () => {
 
@@ -57,7 +78,8 @@ const Page = () => {
   }, [reports]);
   
   if (isLoading) return <div className={styles.errorComponent}> Loading...</div>;
-  if (isError) return <div className={styles.errorComponent}>Error loading data</div>;
+  if (isError) return <div className={styles.errorComponent}>데이터 로딩 실패</div>;
+
   console.log(stores);
   
 
@@ -65,7 +87,7 @@ const Page = () => {
     <div className={styles.container}>
       {stores?.map((store, index) => {
         return(
-          <div key={store.reportId} className={styles.box}>
+          <div key={`${store.reportId}-${index}`} className={styles.box}>
             {store.errorType === 'other' ? (
                 <div className={styles.errorBox}>{store.errorContent}</div>
               ) : (
@@ -101,7 +123,6 @@ const Page = () => {
             />
             <input
               className={styles.inputBox}
-              type="text"
               value={store.address}
               placeholder="주소"
               onChange={(e) => handleInputChange(index, 'address', e.target.value)}
@@ -138,25 +159,3 @@ const Page = () => {
 
 
 export default Page;
-
-
-const sendData = async ({method, reportId, data}: sendDataProps) => {
-  const url = `http://localhost:8080/admin/${reportId}`;
-  
-  const options: RequestInit = {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: data ? JSON.stringify(data) : undefined,
-  };
-
-  const response = await fetch(url, options);
-  
-  if (!response.ok) {
-
-  console.error(response);
-  }
-
-  return response.json();
-};

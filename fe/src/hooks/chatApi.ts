@@ -33,7 +33,7 @@ export const createChatRoom = async (storeId: string): Promise<void> => {
   }
 };
 
-// 채팅방 입장
+// 채팅방 입장, 채팅 이력 가져오기
 export const enterChatRoom = async (storeId: string): Promise<{ roomId: number; chatDtoList: { text: string; time: string }[] }> => {
   const response = await fetch(`${baseURL}/room/${storeId}`, {
     ...defaultOptions,
@@ -43,6 +43,11 @@ export const enterChatRoom = async (storeId: string): Promise<{ roomId: number; 
   if (!response.ok) {
     throw new Error('Failed to enter chat room');
   }
+  
+  const data = await response.json();
 
-  return response.json();
+  return {
+    roomId: data.roomId,
+    chatDtoList: Array.isArray(data.chatDtoList) ? data.chatDtoList : [], // chatDtoList가 항상 배열이 되도록 보장
+  };
 };

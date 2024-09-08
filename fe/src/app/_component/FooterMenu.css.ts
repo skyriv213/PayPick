@@ -3,9 +3,9 @@ import {global} from "@/app/globalTheme.css";
 
 export const container = style({
   display: 'flex',
-  position: 'relative',
-  bottom: '43px',
+  position: 'fixed',
   width: '100%',
+  height: '40px',
   padding: '12px 0px',
   borderTop: '1px solid lightGray',
   backgroundColor: 'rgba(255, 255, 255, 0.6)',
@@ -14,7 +14,6 @@ export const container = style({
 
 export const menu = style({
   display: 'flex',
-  position: 'relative',
   justifyContent: 'center',
   flex: 1,
   fontSize: '14px',
@@ -22,7 +21,6 @@ export const menu = style({
 
 export const borderMenu = style({
   display: 'flex',
-  position: 'relative',
   justifyContent: 'center',
   flex: 1,
   fontSize: '14px',

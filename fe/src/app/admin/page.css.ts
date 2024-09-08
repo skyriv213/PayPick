@@ -6,11 +6,12 @@ export const container = style({
   flexDirection: 'column',
   backgroundColor: "white",
   width: '100%',
-  height: 'calc(100dvh - 60px)'
+  height: 'calc(100dvh - 40px)',
+  paddingTop: '64px',
 })
 
 export const box = style({
-  padding: '4px 8px',
+  padding: '0px 8px 4px 8px',
   width: 'calc(100%-8px)',
   boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px',
   border: '1px solid lightGray',

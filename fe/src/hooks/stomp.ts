@@ -3,11 +3,16 @@ import { Client, IMessage } from '@stomp/stompjs';
 
 let stompClient: Client | null = null;
 
-export const connectToChat = (roomId: string, onMessageReceived: (message: IMessage) => void) => {
-  const socketUrl = 'wss://localhost/chat'; // 백엔드 WebSocket 엔드포인트
+const socketUrl = 'wss://localhost/ws/chat';
 
+export const connectToChat = (storeId: string, onMessageReceived: (message: IMessage) => void) => {
+  if (stompClient && stompClient.active) { // 이미 클라이언트가 활성화된 경우 재연결 방지
+    console.log('STOMP client is already connected.');
+    return;
+  }
+  
   stompClient = new Client({
-    brokerURL: `${socketUrl}/${roomId}`,
+    brokerURL: socketUrl,
     debug: (str: string) => {
       console.log(str);
     },
@@ -20,7 +25,7 @@ export const connectToChat = (roomId: string, onMessageReceived: (message: IMess
     console.log('Connected to WebSocket server');
 
     // 특정 채팅방 구독
-    stompClient?.subscribe(`/topic/rooms/${roomId}`, (message: IMessage) => {
+    stompClient?.subscribe(`/topic/rooms/${storeId}`, (message: IMessage) => {
       onMessageReceived(message);
     });
   };
@@ -40,7 +45,7 @@ export const disconnectFromChat = () => {
   }
 };
 
-export const sendMessage = (roomId: string, text: string, time: string) => {
+export const sendMessage = (storeId: string, text: string, time: string) => {
   if (stompClient && stompClient.connected) {
     const chatMessage = {
       text,
@@ -48,8 +53,32 @@ export const sendMessage = (roomId: string, text: string, time: string) => {
     };
 
     stompClient.publish({
-      destination: `/app/rooms/${roomId}`,
+      destination: `/app/rooms/${storeId}`,
       body: JSON.stringify(chatMessage),
     });
   }
 };
+
+// Application error: a client-side exception has occurred (see the browser console for more information).
+
+// export const sendMessage = (storeId: string, text: string, time: string) => {
+//   if (!stompClient || !stompClient.connected) {  // 연결 상태를 확인
+//     console.error('Cannot send message: STOMP client is not connected.');
+//     return; // 연결되지 않은 경우 함수 종료
+//   }
+
+//   const chatMessage = {
+//     text,
+//     time,
+//   };
+
+//   try {
+//     stompClient.publish({
+//       destination: `/app/rooms/${storeId}`,
+//       body: JSON.stringify(chatMessage),
+//     });
+//     console.log('Message sent:', chatMessage);
+//   } catch (error) {
+//     console.error('Error sending message:', error);
+//   }
+// };

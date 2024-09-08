@@ -6,11 +6,10 @@ export const container = style({
   flexDirection: 'column',
   width: '100dvw',
   maxWidth: '540px',
-  height: 'calc(100dvh - 60px)',
+  height: 'calc(100dvh - 40px)',
   padding: '40px 40px',
   backgroundColor: 'rgb(248, 249, 253)',
   justifyContent: 'center',
-  
  });
 
 export const info = style({
