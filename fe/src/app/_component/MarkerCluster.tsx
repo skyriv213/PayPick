@@ -66,12 +66,12 @@ const MarkerCluster = () => {
       });
         
       const markerClustering = new MarkerClustering({
-        minClusterSize: 5,
-        maxZoom: 16,
+        minClusterSize: 3,
+        maxZoom: 17,
         map,
         markers,
         disableClickZoom: false,
-        gridSize: 200,
+        gridSize: 150,
         icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4],
         indexGenerator: [20, 50, 100, 300],
         stylingFunction: function (clusterMarker: any, count: number) {
