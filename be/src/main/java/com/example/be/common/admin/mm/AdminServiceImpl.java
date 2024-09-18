@@ -50,5 +50,10 @@ public class AdminServiceImpl implements AdminService {
     storeService.deleteStore(storeId);
   }
 
+  @Override
+  public void deleteReport(Long reportId) {
+    reportService.deleteReport(reportId);
+  }
+
 
 }

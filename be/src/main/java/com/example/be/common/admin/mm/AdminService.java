@@ -14,4 +14,6 @@ public interface AdminService {
   void createStoreByReport(Long reportId, StoreCreateDto storeDto);
 
   void deleteStore(Long storeId);
+
+  void deleteReport(Long reportId);
 }

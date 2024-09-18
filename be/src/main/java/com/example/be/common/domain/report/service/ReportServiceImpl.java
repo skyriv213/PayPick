@@ -70,4 +70,10 @@ public class ReportServiceImpl implements ReportService {
         .orElseThrow(() -> new IllegalArgumentException("해당 리포트는 존재하지 않습니다."));
     return report;
   }
+
+  @Override
+  @Transactional
+  public void deleteReport(Long reportId) {
+    reportRepository.deleteById(reportId);
+  }
 }

@@ -14,4 +14,6 @@ public interface ReportService {
   List<ReportStoreAdminDto> getReportStoreAll();
 
   Report findById(Long reportId);
+
+  void deleteReport(Long reportId);
 }

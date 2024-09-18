@@ -49,9 +49,16 @@ public class AdminController {
     return RESPONSE_OK;
   }
 
-  @DeleteMapping("/{storeId}")
+  @DeleteMapping("/store/{storeId}")
   public ResponseEntity<StatusResponse> deleteStore(@PathVariable Long storeId) {
     adminService.deleteStore(storeId);
     return RESPONSE_OK;
   }
+
+  @DeleteMapping("/{reportId}")
+  public ResponseEntity<StatusResponse> deleteReport(@PathVariable Long reportId) {
+    adminService.deleteReport(reportId);
+    return RESPONSE_OK;
+  }
 }
+

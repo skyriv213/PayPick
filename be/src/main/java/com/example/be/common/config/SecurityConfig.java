@@ -17,6 +17,19 @@ import java.util.Arrays;
 @Configuration
 public class SecurityConfig {
 
+    private final String[] permitArray = {
+        "/store",
+        "/store/**",
+        "/report",
+        "/report/**",
+        "/room",
+        "/room/**",
+        "/ws/chat/**",
+        "/admin",
+        "/admin/**"
+
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
@@ -32,44 +45,13 @@ public class SecurityConfig {
 
 
         httpSecurity.authorizeHttpRequests(auth -> auth
-            .requestMatchers("/store/**", "/report/**", "/admin/**", "/room/**")
-            .permitAll()
+            .requestMatchers(permitArray).permitAll()
             .requestMatchers(HttpMethod.GET, "/").permitAll()
-            .requestMatchers("/ws/chat/**").permitAll()
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .anyRequest().authenticated());
 
         return httpSecurity.build();
     }
-//
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-////        CorsConfiguration configuration = new CorsConfiguration();
-////        configuration.setAllowedMethods(Arrays.asList("*"));
-////        configuration.setAllowCredentials(true);
-////        configuration.addAllowedHeader("*");
-////        configuration.setExposedHeaders(Arrays.asList("*"));
-////
-////        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-////        source.registerCorsConfiguration("/**", configuration);
-////        return source;
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOrigin("*"); // 특정 도메인 허용
-//        configuration.addAllowedOriginPattern("*"); // 도메인 패턴 허용
-//        configuration.addAllowedOrigin("http://localhost:3000"); // 특정 도메인 허용
-////        configuration.addAllowedOrigin("http://localhost"); // 특정 도메인 허용
-////        configuration.addAllowedOriginPattern("http://localhost:3000");  // 정확한 도메인 패턴 허용
-////        configuration.addAllowedOriginPattern("http://localhost");  // 정확한 도메인 패턴 허용
-//        configuration.setAllowedMethods(Arrays.asList("*"));
-//        configuration.setAllowCredentials(true);
-//        configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.addAllowedHeader("*");
-//        configuration.setExposedHeaders(Arrays.asList("*"));
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
