@@ -6,6 +6,7 @@ import { Store, storeData } from '@/types/store';
 import { CURRENT_STORE_KEY } from '@/hooks/useStore';
 import { getApi } from '@/hooks/api';
 import Link from 'next/link';
+import Image from 'next/image';
 
  const StoreDetail = () => {
 
@@ -37,11 +38,21 @@ import Link from 'next/link';
         <div className={styles.displayModal}>
           <div className={styles.payInfo}>
             <div>{name}</div>
-            <Link href={`/chat/${id}`}>chat</Link>
-            <button className={styles.buttonCss} onClick={() => storeModal(false)}>X</button>
+            
+            <button className={styles.buttonCss} onClick={() => storeModal(false)}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="16px" height="16px">
+                <line x1="10" y1="10" x2="40" y2="40" stroke="#3D6CE5" fill="#3D6CE5" strokeWidth="5" strokeLinecap="round"/>
+                <line x1="40" y1="10" x2="10" y2="40" stroke="#3D6CE5" fill="#3D6CE5" strokeWidth="5" strokeLinecap="round"/>
+              </svg>
+            </button>
           </div>
-          <div >
+          <div className={styles.payInfo}>
             <div className={styles.info}>{middleCategory}</div>
+            <Link href={`/chat/${id}?name=${encodeURIComponent(name)}`}>
+              <Image src="/chat.svg" alt="chat icon" width={20} height={20}></Image>
+            </Link>
+          </div>
+          <div>
             <div className={styles.info}>{address}</div>
           </div>
           <div className={styles.payInfo}>

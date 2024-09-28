@@ -1,0 +1,173 @@
+﻿동작,Method,URI,Request Param,Request Header,Request Body,Response Header,Response Body,Response Body (예제)
+좌표값에 따른 매장 정보 리스트 조회하기,GET,http://localhost:8080/store?boundary=37.689502%3B126.7767692%3B37.9971258%3B126.9825628,"boundary : string
+예제:
+boundary=37.689502%3B126.7767692%3B37.9971258%3B126.9825628,
+boundary=southWest.y southWest.x northEast.y northEast.x",,,"{
+”statusCode” : 200
+}","{
+stroes[
+{
+”id”:Integer,
+”name” :”String”,
+”middleCategory"" : “String”
+""lat"": “number”,
+""lng"": “number”
+},
+{
+”id”:Integer,
+”name” :”String”,
+”middleCategory"" : “String”
+""lat"": “number”,
+""lng"": “number”
+},
+]
+}","[
+{
+""id"": 96,
+""name"": ""푸른바다찜탕"",
+""middleCategory"": ""백반/한정식"",
+""lat"": 37.7556802890968,
+""lng"": 126.779467432643
+},
+}"
+매장 정보 조회하기,GET,/store/{storeId},,,,"{
+”statusCode” : 200
+}","{
+”id”:Integer,
+”name” :”String”,
+""majorCategory"": ""String"",
+""middleCategory"": ""String"",
+”address” :”String”,
+”storeEnum” : “Enum”
+”paymentList:[
+  ”applePay”
+]
+}","{
+""id"": 178439,
+""name"": ""미스터피자일산탄현점"",
+""majorCategory"": ""음식"",
+""middleCategory"": ""피자"",
+""address"": ""경기도 고양시 일산서구 탄현로 136"",
+""paymentList"": []
+}"
+이미 데이터가 있는 매장 신고하기,POST,/report/{storeId},,,"{
+ “storeName” : “String”,
+ “errorType” : “enum”
+ ”errorContent” : “String”
+}","{
+”statusCode” : 200
+}",,
+없는 매장 신고하기-신규 매장 요청하기,POST,/report,,,"{
+ “storeName” : “String”,
+ “errorType” : “enum”
+ ”errorContent” : “String”
+}","{
+”statusCode” : 200
+}",,
+,,,,,,,,
+———관리자,,,,,,,,
+"관리자 페이지 ",,,,,,,,
+"페이, 매장 정보 오류가 신고된 매장 조회하기",GET,/admin,,,,"{
+”statusCode” : 200
+}","[
+{
+ ”reportId” : “Integer”,
+ “errorType” : “enum”,
+ ”errorContent” : “String”,
+ ”storeId” : “Integer”,
+ “name” : “String”,
+ ""majorCategory"": ""String"",
+ ""middleCategory"": ""String"",
+ ""lat"": “number”,
+ ""lng"": “number”
+ ”address” :”String”,
+},{
+ ”reportId” : “Integer”,
+ “errorType” : “enum”,
+ ”errorContent” : “String”,
+ ”storeId” : “Integer”,
+ “name” : “String”,
+ ""majorCategory"": ""String"",
+ ""middleCategory"": ""String"",
+ ""lat"": “number”,
+ ""lng"": “number”
+ ”address” :”String”,
+}
+]",errorType 부분 어떻게 보내면 될까?
+매장 추가하기,POST,/admin/{reportId},,,"{
+ “name” : “String”,
+ ""majorCategory"": ""String"",
+ ""middleCategory"": ""String"",
+ ""lat"": “number”,
+ ""lng"": “number”
+ ”address” :”String”,
+""paymentList"": []
+}","{
+”statusCode” : 200
+}",,
+있는 매장 정보 수정하기,PATCH,/admin/{reportId},,,"{
+ ”storeId” : “Integer”,
+ “name” : “String”,
+ ""majorCategory"": ""String"",
+ ""middleCategory"": ""String"",
+ ""lat"": “number”,
+ ""lng"": “number”
+ ”address” :”String”,
+""paymentList"": []
+}","{
+”statusCode” : 200
+}",,
+매장 정보 삭제하기,DELETE,/admin/{storeId},,,,"{
+”statusCode” : 200
+}",,
+로그인,POST,/login,,‘Content-Type: application/json’,"{
+""email"": ""string"",
+""password"": ""string""
+}","{
+”statusCode” : 200
+}",,
+—일단 스킵,,,,,,,,
+매장 정보 생성하기,POST,/map,,,,,,
+,,,,,,,,
+,,,,,,,,
+—채팅(사용자들끼리 쓸수있도록),,,,,,,,
+채팅방 생성 확인,GET,“/room/check/{storeId},,,,"{
+”statusCode” : 200
+}","{
+”checkRoom” : boolean
+}",
+채팅방 생성,POST,"""/room/{storeId}”",,,,"{
+”statusCode” : 200
+}",,
+채팅방 입장,GET,"""/room/{storeId}”",,,,"{
+”statusCode” : 200
+}","{
+roomId : Integer
+chatDtoList : [
+{
+”text” :  String,
+”time” : String
+},
+{
+”text” :  String,
+”time” : String
+},
+]
+}",
+채팅 보내기,WS,“/app/rooms/{roomId},,,"{
+”text” : String,
+”time” : LocalDateTime
+}",,"{
+”text” : String,
+”time” : LocalDateTime
+}",
+채팅 받기,WS,/topic/rooms/{roomId},,,"{
+”text” : String,
+”time” : LocalDateTime
+}",,"{
+”text” : String,
+”time” : LocalDateTime
+}",
+최근 본 상점,,"마커 클릭 → 상점 데이터가 남음 → 최근 본 상점 데이터에 쌓아둠 ",,,,,,
+,,,,,,,,
+,,,,,,,,

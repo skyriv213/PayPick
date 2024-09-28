@@ -81,18 +81,28 @@ const Page = () => {
   if (isError) return <div className={styles.errorComponent}>데이터 로딩 실패</div>;
 
   console.log(stores);
+
+  const errorMessages = {
+    impossible: '애플페이 결제가 불가능한 곳이에요',
+    possible: '애플페이 결제가 가능한 곳이에요',
+    different: '매장 이름이 실제와 달라요',
+    notThere: '없는 매장이에요',
+  } as const;  // as const를 사용해 객체를 리터럴 타입으로 고정
+
+  type ErrorType = keyof typeof errorMessages | 'other'; // 'other' 타입도 추가
   
 
   return (
     <div className={styles.container}>
       {stores?.map((store, index) => {
+        // 'other'일 경우에는 store.errorContent 사용, 그렇지 않으면 errorMessages에서 가져옴
+        const errorMessage = store.errorType === 'other' 
+        ? store.errorContent 
+        : errorMessages[store.errorType as keyof typeof errorMessages] || '입력되지 않았음';
+
         return(
           <div key={`${store.reportId}-${index}`} className={styles.box}>
-            {store.errorType === 'other' ? (
-                <div className={styles.errorBox}>{store.errorContent}</div>
-              ) : (
-                <div className={styles.errorBox}>{store.errorType}</div>
-              )}
+            <div className={styles.errorBox}>{errorMessage}</div>
             <input
               className={styles.inputBox}
               type="text"
@@ -130,10 +140,16 @@ const Page = () => {
             <input
               className={styles.inputBox}
               type="text"
-              value={store.paymentList}
+              list="paymentOptions"  // datalist를 연결
+              value={Array.isArray(store.paymentList) ? store.paymentList.join(', ') : ''}  // 배열인지 확인하고 join 호출
               placeholder="페이"
-              onChange={(e) => handleInputChange(index, 'paymentList', e.target.value.split(','))}
+              onChange={(e) => handleInputChange(index, 'paymentList', e.target.value.split(',').map((value) => value.trim()))}
             />
+            <datalist id="paymentOptions">
+              <option value="Apple" />
+              <option value="Naver" />
+              <option value="Kakao" />
+            </datalist>
             <div className={styles.buttonContainer}>
               <div className={styles.buttonBox}>
                 {store.id ? (

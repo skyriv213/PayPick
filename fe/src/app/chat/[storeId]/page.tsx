@@ -1,17 +1,23 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useEffect, useState, useRef } from 'react';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { checkChatRoom, createChatRoom, enterChatRoom } from '@/hooks/chatApi';
 import { connectToChat, disconnectFromChat, sendMessage } from '@/hooks/stomp';
 import { IMessage } from '@stomp/stompjs';
 import * as styles from './page.css'
+import Image from 'next/image';
 
 
 const ChatRoom: React.FC = () => {
   const router = useRouter()
   const params = useParams();
+  const searchParams = useSearchParams();
+
   const storeId = params.storeId;
+  const name = searchParams.get('name');
+
+  const chatBoxRef = useRef<HTMLDivElement>(null);  // 채팅 박스 Ref 설정
 
   const isString = (value: string | string[] | undefined): value is string => {
     return typeof value === 'string';
@@ -58,6 +64,12 @@ const ChatRoom: React.FC = () => {
     };
   }, [storeId, router]);
 
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   const handleSendMessage = () => {
     if (messageInput.trim() !== '' && isString(storeId)) {
       const time = new Date().toISOString();
@@ -66,27 +78,57 @@ const ChatRoom: React.FC = () => {
     }
   };
 
+  const formatDate = (isoString: string) => {
+    const date = new Date(isoString); // ISO 문자열을 Date 객체로 변환
+    
+    const options: Intl.DateTimeFormatOptions = {
+      year: '2-digit', 
+      month: '2-digit', 
+      day: '2-digit', 
+      hour: 'numeric',  
+      minute: 'numeric', 
+      hour12: true, // 오전/오후 형식
+    };
+  
+    // 사용자의 현지 시간대에 맞게 변환하여 표시
+    return date.toLocaleString('ko-KR', options);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <h1>Chat Room for Store: {storeId}</h1>
-      <div id="messageArea" style={{ height: '300px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px' }}>
-        {Array.isArray(messages) && messages.map((msg, index) => (
-          <div key={index}>
-            <strong>{msg.time}: </strong>
-            <span>{msg.text}</span>
+      <h3>{name}</h3>
+      <div className={styles.chatBorder}>
+        <div className={styles.chatBox} ref={chatBoxRef}>
+          {Array.isArray(messages) && messages.map((msg, index) => (
+            <div key={index} className={styles.messageContainer}>
+            <div className={styles.messageBox}>
+              <span>{msg.text}</span>
+            </div>
+            <span className={styles.time}>{formatDate(msg.time)}</span>
           </div>
-        ))}
+          ))}
+        </div>
+        <div className={styles.inputBox}> 
+          <input
+            type="text"
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
+            placeholder= "메세지를 입력해주세요"
+            className={styles.inputField}
+            onKeyUp={handleKeyDown}
+          />
+          <button onClick={handleSendMessage} className={styles.button}>
+            <Image src="/send.svg" alt="send icon" width={30} height={30}></Image>
+          </button>
+        </div>
       </div>
-      <input
-        type="text"
-        value={messageInput}
-        onChange={(e) => setMessageInput(e.target.value)}
-        placeholder="Enter your message"
-        style={{ width: '80%', padding: '100px' }}
-      />
-      <button onClick={handleSendMessage} style={{ padding: '10px' }}>
-        Send
-      </button>
+      
     </div>
   );
 };

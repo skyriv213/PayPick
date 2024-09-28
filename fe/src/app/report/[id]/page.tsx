@@ -22,11 +22,11 @@ const Page = () => {
   useEffect(() => {
     const name = searchParams.get('name');
 
-    // if (!name) { // url 조작으로 report/[id] 페이지 접근시 일반 report 페이지로 리디렉션
-    //   alert('잘못된 접근입니다!');
-    //   router.push('/report');
-    //   return;
-    // }
+    if (!name) { // url 조작으로 report/[id] 페이지 접근시 일반 report 페이지로 리디렉션
+      alert('잘못된 접근입니다!');
+      router.push('/report');
+      return;
+    }
 
     if (typeof name === 'string') {
       setFormData(prevState => ({

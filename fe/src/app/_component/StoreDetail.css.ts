@@ -1,4 +1,5 @@
 import {style} from "@vanilla-extract/css";
+import {global} from "@/app/globalTheme.css";
 
 export const container = style({
   position:'absolute',
@@ -7,7 +8,7 @@ export const container = style({
   width:'80%',
   minWidth: '300px',
   maxWidth: '432px',
-  height: '10rem',
+  height: '9rem',
   minHeight: '150px',
   padding:'12px',
   backgroundColor: "white",
@@ -26,24 +27,29 @@ export const container = style({
 export const displayModal = style({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  justifyContent: "space-around",
   width: '100%',
   height: '100%',
 });
 
 export const info = style({
- paddingBottom: "8px"
+//  paddingBottom: "8px"
 });
 
 export const payInfo = style({
   display: "flex",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
+  height: '20px',
 });
 
 export const buttonCss = style({
-  width: '30px',
-  height: '30px',
+  width: '20px',
+  height: '20px',
   borderRadius: '50%',
-  border: 'none',
-  color: 'gray'
+  display: 'flex',  // flexbox 사용
+  justifyContent: 'center',  // 수평 중앙 정렬
+  alignItems: 'center',  // 수직 중앙 정렬
+  color: global.foreground.color,
+  border: `1px solid ${global.foreground.color}`,
+  background: 'none',
 });
